@@ -1,0 +1,419 @@
+---
+title: "Full guide on custom actions"
+description: "You’re a developer and you can’t find everything you need to design your process? You can create your own custom action that you can reuse in any process."
+---
+
+You’re a developer and you can’t find everything you need to design your process? You can create your own custom action that you can reuse in any process.
+
+### **Prerequirements**
+
+- [GitHub account](https://github.com/)
+- [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) (or above)
+
+**Step 1:&#xA0;**&#x43;onnect to your GitHub account and generate a GitHub access token, by selecting from your personal account "Settings" > "Developer settings" > "Personal access tokens" > "Generate New Token". Make sure that **read\:packages** option is selected.
+
+![](/images/docs/pJhoPddT80WvmGT_9QrOH_readpackages.png)
+
+**Step 2:** Make sure you have nuget.exe ([NuGet Command-Line Interface (CLI) Reference](https://docs.microsoft.com/en-us/nuget/reference/nuget-exe-cli-reference) ) installed on your computer and that it is added to the PATH environment variable. 
+
+Add PROCESIO Nuget source from the command line by running the following the command from command line (in admin mode to be sure it will be processed):
+
+<Callout type="info">
+nuget sources add -Name procesio-development -Source https\://nuget.pkg.github.com/PROCESIO/index.json  -UserName \[your Git hub user name] -Password \[your API Key]
+</Callout>
+
+To check the outcome, go in a  Visual Studio 2019, select from the menu Tools/Options/NuGet Package Manager/Package Sources and check that the following source under whatever name you’ve used: **https\://nuget.pkg.github.com/PROCESIO/index.json**.
+
+<Callout type="info">
+Alternatively, you can  go in any Visual Studio 2019 menu to Tools/Options/NuGet Package Manager/Package Sources and add the following source under whatever name you’d like: https\://nuget.pkg.github.com/PROCESIO/index.json. You will be asked to provide your credentials (UserName \[your Git hub user name] and Password \[your API Key]) the first time you try to use a package from this source.
+</Callout>
+
+**Step 3:** Create a new .Net Project of type Class Library (.Net Core 3.1) and manage its NuGet packages. To manage the NuGet packages, go to "Tools" → "Nuget Package Manager" → "Manage NuGet Packages for Solution". Select your newly configured package source from the upper right corner dropdown and browse for the latest **Ringhel.Procesio.Action.Core** package.
+
+![](/images/docs/TxhIriqOoYEPbUPm9sNtF_image.png)
+
+**Step 4:** Edit the **.csproj** file with the following lines:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetsForTfmSpecificBuildOutput>
+      $(TargetsForTfmSpecificBuildOutput);IncludeDepsInPackage
+    </TargetsForTfmSpecificBuildOutput>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>
+      $(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb;.json
+    </AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <Version>1.0.0.1</Version>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Ringhel.Procesio.Action.Core" Version="1.19.2" />
+  </ItemGroup>
+
+  <Target Name="IncludeDepsInPackage">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(OutDir)*" />
+    </ItemGroup>
+  </Target>
+</Project>
+```
+
+<Callout type="error">
+If you choose to use the following optional tags, you will need to update them manually when you create a new build in the same way as you update the **Version** tag or the changes will not appear in the new build.&#x20;
+
+```xml
+<AssemblyVersion>1.0.0.1</AssemblyVersion>
+<FileVersion>1.0.0.1</FileVersion>
+```
+</Callout>
+
+At the moment of writing this guide the latest **Ringhel.Procesio.Action.Core** package is 1.14.1.3, you need to check the current version when adding the package and use it your .csproj file.
+
+The tag **\&lt;Version>1.0.0.1\&lt;/Version>** shows the current version of the package and it changes dynamically. If you wish to create another custom action using the same project after updating the code you will need to change the package version by:
+
+1. Select **Project** from the Visual Studio menu and click projectnameProperties.
+2. In the **Package** section you will see the Package version, it needs to be changed each time you build a new custom action. By Default it starts at 1.0.0.0.
+
+![](/images/docs/GaeK2sgFzX01643T5s7pr_image.png)
+
+**Step 5:** Create your custom action in a new class. To do this there are only two requirements to implement for your classes to become proper custom actions:
+
+- Include the following namespaces in your Custom Action class definition (you can find more details here: [PROCESIO/Action-Core](https://github.com/PROCESIO/Action-Core)):
+  - Ringhel.Procesio.Action.Core - to implement IAction interface
+  - Ringhel.Procesio.Action.Core.ActionDecorators - to use Action Decorators
+  - Ringhel.Procesio.Action.Core.Utils - to use Enums that are available for the different enumerators
+  - Ringhel.Procesio.Action.Core.Models -  to use OptionModel class for defining multi-values inputs
+- Make sure you inherit the IAction interface. This is mandatory because Procesio needs the Execute method in order to run your action within a flow. This is where you will add the logic of whatever behavior you need the action to have.
+- Use proper attributes for your properties to define what type and use they have within your new action. These attributes are necessary for Procesio to create the Action Template, which is like a contract used for the UI to dynamically interpret and display any type of provided action correctly within the platform.
+
+For more details about how to develop your custom action, check the sections below.
+
+**Step 6:** Build the NuGet package.
+
+**Step 7:** Connect to PROCESIO and open any process. On the left toolbar, select the “Custom actions” tab and click on “Create custom action”. Give a name to the action and select an icon (optional), then upload your NuGet file. Click Save. If all validations pass, your custom action will be displayed in the toolbar, under the “Custom actions” tab.
+
+<Callout type="info">
+Note that a custom action can be used for any process.
+
+If you want to update a custom action, you need to rebuild the NuGet package with a different version number, then create it again in the process designer.
+</Callout>
+
+### **Example of class implementation**
+
+```csharp
+[ClassDecorator(Name = "Custom Template Action", Shape = ActionShape.Circle,
+Description = "Custom Template Action Description", Classification = Classification.cat1)]
+[FEDecorator(Label = "Configuration Modal", Type = FeComponentType.Modal, 
+Parent = "Config_Modal", Tab = "Input Tab")]
+public class MyCustomAction : IAction
+{
+   public async Task Execute()
+    {
+       //add your desired behavior he
+       Output = "expected outcome";
+    }
+   //add properties and helper methods and whatever else is needed for your logic;
+}
+```
+
+### **Required Class Attributes Overview**
+
+![](/images/docs/Q4fDMQcuvvrmCbP_lcOfw_classattributes.png)
+
+### **Required Property Attributes Overview**
+
+![](/images/docs/TlO3q3yDQ6a1OPRAZv_Z6_propertiesattributes.png)
+
+### **Example of full properties implementation**
+
+```csharp
+[FEDecorator(Label = "FE Input property", Type = FeComponentType.Select, Tab = "Input Tab", Options = "MyOptionsList")]
+[BEDecorator(IOProperty = Direction.Input)]
+[Validator(IsRequired = false)]
+public int MyInput { get; set; }
+
+[FEDecorator(Label = "FE Output property", Type = FeComponentType.Number, Tab = "Output Tab", DefaultValue = "2")]
+[BEDecorator(IOProperty = Direction.Output)]
+[Validator(IsRequired = true, Expects = ExpectedType.Number)]
+public int MyOutput { get; set; }
+```
+
+The accepted types for a property are:
+
+- int
+- string
+- boolean
+- double
+- DateTime
+
+We do not accept at this point user defined types or Nullable types. The value of a property in the designer will be the **DefaultValue** from the **FEDecorator**. If that property is not required via the **Validator decorator&#xA0;**&#x61;nd  **DefaultValue** is not defined either, then we will use the default value of the corresponding data type from C# (0 for int and double, false for boolean, etc.). The same applies if the default value is deleted by the user and no other value is specified.
+
+**Description of the different property attributes usag**
+
+1\. Back End property attribute used to define whether a property is of Input or Output type:
+
+```csharp
+[BEDecorator(IOProperty = Direction.Input)]
+
+OR
+
+[BEDecorator(IOProperty = Direction.Output)]
+```
+
+2\. Front End property attributes are used to set the type of component, a default value or a list of options for the values, its parent component or the tab it belongs to. 
+
+ The way the **FeComponentType&#xA0;**&#x61;ttribute is set will influence the display control used in the platform:&#x20;
+
+1. For control type Number:
+
+![](/images/docs/2EnfJvXLtR_NFo3fM7poi_second.png)
+
+
+
+&#x20;       2\. For control type Text:
+
+![](/images/docs/ptd7uispcyJRkT8Qb9c4O_emailr.png)
+
+&#x20;       3\. For control type Checkbox:
+
+![](/images/docs/Vwc_trXM8EnlI8NhesvCD_check.png)
+
+&#x20;       4\. For control type Radio:
+
+![](/images/docs/u51Td2-VjT3nsmR3wvq1-_filheader.png)
+
+&#x20;       5\. For control type Select:
+
+![](/images/docs/Az05COOyOBCkjR38rAzg0_control.png)
+
+&#x20;       6\. For control type Modal:
+
+![](/images/docs/F9UuIWOVoKHcf3OrYwHqQ_modal.png)
+
+Besides the control type, you will need a control label using the **Label** attribute. 
+
+You can also set a default value to your control using the DefaultValue attribute. Example of an input control of number type with default value 0 when not set:
+
+```csharp
+[FEDecorator(Label = "FE Input property", Type = FeComponentType.Number, Tab = "Input Tab", DefaultValue ="0")]
+```
+
+The Tab attribute, from the above example, is an attribute used in the UI to group all variables associated with it.
+
+![](/images/docs/Y7zZB2MwWt9e_QJ3iQWOd_tab.PNG)
+
+When you have complex types like Select, Buttons or Modals that will open a new window/popup, you can use the Parent attribute to group all properties under it. The parent attribute and the parent name will be automatically associated. Also, a property can belong to either a Tab or a Parent.
+
+![](/images/docs/QjcEydvwmxMkCA0Bz1nnE_mmodal.png)
+
+Using **FeCompomponentType.Select** requires the Option attribute so that the UI populates the select control correctly. Options attribute will contain the name of the list of elements you are permitting. Example of a select control to give the users the choice of selecting a value from the defined list ConfigOptions (of name & value pairs):
+
+```csharp
+[FEDecorator(Label = "FE Input property", Type = FeComponentType.Select, Tab = "Input Tab", Options = "ConfigOptions")]
+```
+
+In your code, you should create a matching named (case-sensitive) list with these desired elements. These elements must respect the case-sensitive “name” & “value” pair format due to the fact that in the UI the select control will list the name, but the value will be the one sent for execution. Please note that currently Procesio supports only primitive values for these elements.&#x20;
+
+The way you implement the list content is up to you, but here are two ways in which the options become available in the designer: for  \[**FEDecorator**(Options = **"MyListOfOptions"**, ...)] we can either use a string constant:
+
+
+
+```csharp
+private const string MyListOfOptions=  "[{\"name\":\"select option name 1\",\"value\":\"1\"},{\"name\":\"select option name 2\",\"value\":\"2\"},{\"name\":\"select option name 3\",\"value\":\"3\"}]";
+```
+
+or an OptionModel list: 
+
+```csharp
+private IEnumerable<OptionModel> MyListOfOptions { get; } = new List<OptionModel>()
+       {
+           new OptionModel(){ name = "select option name 1", value = 1 }, 
+
+           new OptionModel(){ name = "select option name 2", value = 2 } 
+       };
+```
+
+The way they get displayed in the platform: 
+
+![](/images/docs/0v4yeJgRdUY6BAWjcM0E6_dropdown.png)
+
+You can add constraints to your controls by using Validator attributes to set which properties are required and their expected type.
+
+```csharp
+[Validator(IsRequired = true, Expects = ExpectedTypeEmail)]
+```
+
+To control the order in which the frontend components will be displayed, we use the OrderId and RowID properties. The OrderId applies to Tab components and it controls the order in which tabs are displayed. The RowId controls the order of the components inside a parent (a tab, modal, or side panel). All components inside a parent component should have a unique RowID, otherwise, the display order will be inconsistent. Multiple components can have the same RowId as long as they belong to different parent components. An example of usage is:
+
+```csharp
+//Use OrderId to specify the order in which tabs should be displayed
+[FETabDecorator(TabName = "Details", OrderId = 1)]
+
+
+//Use RowId to specify the order in which components inside a parent 
+//should be displayed
+[FEDecorator(Label = "Value to increment", Type = FeComponentType.Number, Tab = "Details", RowId = 1)]
+```
+
+### **Using lists**
+
+To use a list inside a Custom Action, one would have to define an IEnumerable property of the required type. To this end, there are several cases where this applies:
+
+**&#x20;   1.  List of primitive data type**
+
+```csharp
+IEnumerable<int> NumericList {get; set;}
+```
+
+
+
+The list usage is quite straightforward in this case.
+
+**&#x20;   2.  List of custom data type**
+
+```csharp
+IEnumerable<JObject> MyCustomList {get;set;}
+```
+
+
+
+This list is a classic IEnumerable of objects, but their content is dynamic, receiving a JSON value as input. The action developer must know the JSON structure to work with.
+
+**&#x20;   3.  List of files**
+
+```csharp
+IEnumerable<FileModel> FileList {get; set;}
+```
+
+
+
+This is a list of files, where each file is sent as a data stream, accessible through the Action.Core.FileModel type. 
+
+The FileModel type has only two properties: Name and File. The Name property holds the file name, and the File property holds the file stream which can be used to retrieve the file content.
+
+Example in using the file stream when iterating through the File list:
+
+```csharp
+foreach(var file in FileList)
+{
+    _ = file.Name; // this is the file name if required.
+
+    _ = file.File; // this is the file Stream which can be used to retrieve file content.
+
+    // example of file stream use:
+    using System.IO.Stream fileStream = file.File;
+
+    Console.WriteLine($"File stream has length of: {fileStream.Length}");
+}
+```
+
+Working with credentials inside a custom action
+
+Apart from the obvious advantages of adding functionality to your processes using custom actions you also have the ability to use SMTP servers and Rest APIs inside your newly create custom action.
+
+To add this functionality to your process you will only need to include the appropriate namespaces and use the following methods.
+
+**Namespaces**
+
+- For the rest API
+
+```csharp
+using Ringhel.Procesio.Action.Core.Models.Credentials.API;
+```
+
+- For the SMTP connection
+
+```csharp
+using Ringhel.Procesio.Action.Core.Models.Credentials.SMTP;
+```
+
+  **SMTP example**
+
+```csharp
+[FEDecorator(Label = "SMTP credential", Type = FeComponentType.Credentials_Smtp, 
+```
+
+A dropdown will appear inside your Process that will allow to pick an existing connection.
+
+![](/images/docs/E1sp6lNv33142sChQ3EgZ_yahoo.png)
+
+**Rest api example**
+
+```csharp
+[FEDecorator(Label = "Rest API credential", Type = FeComponentType.Credentials_Rest,
+           Parent = "Side_Panel_Parent", RowId = 5)]
+[BEDecorator(IOProperty = Direction.Input)]
+[Validator(IsRequired = true)]
+  public APICredentialsManager apicredential
+     {
+         get; set;
+     }
+```
+
+A dropdown will appear inside your Process that will allow to pick an existing connection.
+
+![](/images/docs/vXWz8JsiZBQEKyRe7t-yJ_restairtable.png)
+
+### **Final observations&#xA0;**
+
+Now all you need to do is to create the NuGet package for your code and upload it in PROCESIO. As a rule a Nuget package must contain only 1 action when uploading it in the platform. As of now, uploading batch actions is not supported (more actions in 1 package).
+
+Also, in order to update your custom actions, users must first delete the initial action (if it is not used in any process yet) and re-initiate the upload process with the new updated code:
+
+If the custom action is already in use in at least a workflow it cannot be deleted, but the users can create a new action with the updated code (e.g. Custom Action\_v2.0).
+
+Example of a fully written class that is a simple custom action that computes the sum of 2 numbers and saves it on the output:
+
+```csharp
+[ClassDecorator(Name = "Custom Template Action", Shape = ActionShape.Circle, Description = "Custom Template Action Description", Classification = Classification.cat1)]
+[FEDecorator(Label = "Configuration Modal", Type = FeComponentType.Modal, 
+Parent = "Config_Modal", Tab = "Input Tab")]
+public class MyCustonAction : IAction
+{
+ #region Options
+ private const string ConfigP1Options = "[{\"name\":\"my name1\",\"value\":\"1\"},{\"name\":\"my name2\",\"value\":\"2\"},{\"name\":\"my name3\",\"value\":\"3\"}]";
+ private const string ConfigP2Options =  "[{\"name\":\"my name3\",\"value\":\"my name value 3\"},{\"name\":\"my name4\",\"value\":\"my name value 4\"}]";
+
+ #endregion
+ #region Properties
+
+ [FEDecorator(Label = "FE Input property", Type = FeComponentType.Select, Tab = "Input Tab", Options = "ConfigP1Options")]
+ [BEDecorator(IOProperty = Direction.Input)]
+ [Validator(IsRequired = false)]
+ public int Input1 { get; set; }
+
+ [FEDecorator(Label = "FE Input property", Type = FeComponentType.Number, Tab = "Input Tab", DefaultValue ="0")]
+ [BEDecorator(IOProperty = Direction.Input)]
+ [Validator(IsRequired = false)]
+ public int Input2 { get; set; }
+
+ [FEDecorator(Label = "FE Output property", Type = FeComponentType.Number, Tab = "Output Tab", DefaultValue = "2")]
+ [BEDecorator(IOProperty = Direction.Output)]
+ [Validator(IsRequired = true, Expects = ExpectedType.Number)]
+ public int Output1 { get; set; }
+
+ [FEDecorator(Label = "FE Config property 2", Type = FeComponentType.Select, Parent = "Config_Modal", Options = "ConfigP2Options")]
+ [BEDecorator(IOProperty = Direction.Output)]
+ public string OutConfig2 { get; set; }
+
+ #endregion
+
+ #region Execute
+
+ public async Task Execute()
+ {
+
+   Output1 = Input1 + Input2;
+
+ }
+
+ #endregion
+
+}
+```
+
+Besides the examples provided in this document, you can also follow the given example of custom actions provided by the Procesio Core project - [Custom template action.](https://github.com/PROCESIO/Action-Core/blob/development/Ringhel.Procesio.Action.Core/TemplateAction/CustomTemplateAction.cs)

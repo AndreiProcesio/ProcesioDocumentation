@@ -1,0 +1,46 @@
+---
+title: "Number Input"
+description: "Like the Text Input, it supports regex-based validation, default values, read-only and disabled modes, and full runtime manipulation via the Procesio…"
+---
+
+### The Number Input element is purpose-built for capturing numeric data from users. Whether collecting quantities, prices, scores, percentages, or any other numeric value, it enforces numeric input at the browser level while remaining flexible enough to accept both integer and decimal values.
+
+Like the Text Input, it supports regex-based validation, default values, read-only and disabled modes, and full runtime manipulation via the Procesio Forms data model. Use it wherever numeric precision matters and you want to prevent non-numeric entries without writing custom validation logic.
+
+## Key Use Cases
+
+•        Quantity fields, pricing inputs, age or score collection
+
+•        Dynamically updating a total or calculated field at runtime by setting value
+
+•        Setting min/max constraints via regex or external form logic
+
+•        Locking a numeric field after a process step by toggling readonly at runtime
+
+•        Pre-filling budget, quota, or threshold values from process variables on form load
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad, onChange, or custom triggers.*
+
+
+
+| **API Name**     | **Description**                                      | **Type**       | **Default** | **Notes** |
+| ---------------- | ---------------------------------------------------- | -------------- | ----------- | --------- |
+| **label**        | Display label shown above the input field            | string         | —           | —         |
+| **placeholder**  | Hint text shown inside the empty field               | string         | —           | —         |
+| **tooltip**      | Help text shown alongside the label                  | string         | —           | —         |
+| **infotext**     | Supplementary info displayed below the input         | string         | —           | —         |
+| **defaultvalue** | Initial value when the form loads                    | number\|string | —           | —         |
+| **value**        | Current runtime value — read or set programmatically | number\|string | —           | —         |
+| **readonly**     | If true, users can view but not edit the value       | boolean        | false       | —         |
+| **disabled**     | If true, the field is fully non-interactive          | boolean        | false       | —         |
+| **visible**      | Controls element visibility                          | boolean        | true        | —         |
+| **name**         | Unique name for referencing in logic/events          | string         | —           | —         |
+| **id**           | Unique element ID                                    | string         | —           | —         |
+| **required**     | Marks the field as mandatory on submit               | boolean        | false       | —         |
+| **regex**        | Regex pattern for custom numeric validation          | string\|null   | —           | —         |
+
+
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

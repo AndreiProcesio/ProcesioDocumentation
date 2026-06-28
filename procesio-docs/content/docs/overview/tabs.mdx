@@ -1,0 +1,51 @@
+---
+title: "Tabs"
+description: "The Tabs element organizes form content into multiple tabbed panels, allowing users to switch between different views or sections of a form without…"
+---
+
+The Tabs element organizes form content into multiple tabbed panels, allowing users to switch between different views or sections of a form without leaving the page. It is ideal for forms that contain distinct, non-sequential categories of information — such as Summary, Details, History, and Attachments — that users may need to access in any order.
+
+Unlike the Stepper (which enforces sequential progression), Tabs give users free navigation between panels. The activetabindex attribute makes it possible to programmatically switch the active tab from event logic — for example, automatically navigating to an error tab if a validation issue is detected, or switching to a Results tab after a process completes. Each tab's visibility can also be toggled individually.
+
+## Key Use Cases
+
+•        Record detail forms with Summary / Activity / Documents / Settings tabs
+
+•        Dashboard-style forms that present different data views in separate tabs
+
+•        Programmatically switching to a specific tab after a process runs (e.g., 'Results' tab)
+
+•        Conditionally hiding tabs that are not relevant to the current user's role
+
+•        Organizing approval forms with separate tabs for Request Details and Review Decision
+
+## Runtime API — Attributes in Procesio Forms
+
+*Both the Tabs container and each Tab have their own API attributes, all accessible at runtime via the data model.*
+
+
+
+**Tabs Container:**
+
+| **API Name**       | **Description**                                                                   | **Type** | **Default** | **Notes** |
+| ------------------ | --------------------------------------------------------------------------------- | -------- | ----------- | --------- |
+| **activetabindex** | Index of the currently active tab (0-based) — set programmatically to switch tabs | number   | —           | —         |
+| **visible**        | Show or hide the entire tabs container                                            | boolean  | true        | —         |
+| **name**           | Unique element name                                                               | string   | —           | —         |
+| **id**             | Unique element ID                                                                 | string   | —           | —         |
+
+
+
+**Individual Tab:**
+
+| **API Name** | **Description**                         | **Type** | **Default** | **Notes** |
+| ------------ | --------------------------------------- | -------- | ----------- | --------- |
+| **label**    | The tab's header label text             | string   | —           | —         |
+| **tooltip**  | Help text shown alongside the tab label | string   | —           | —         |
+| **visible**  | Show or hide this individual tab        | boolean  | true        | —         |
+| **name**     | Unique tab name                         | string   | —           | —         |
+| **id**       | Unique tab ID                           | string   | —           | —         |
+
+
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

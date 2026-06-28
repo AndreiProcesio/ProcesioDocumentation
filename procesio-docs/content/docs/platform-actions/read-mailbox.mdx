@@ -1,0 +1,85 @@
+---
+title: "Read Mailbox"
+description: "PROCESIO integrates Read Mailbox action with your email server configurations. This means that once you configure the Read Mailbox server to use…"
+---
+
+<Callout type="warn">
+Read Mailbox was previously called Inbound Email.
+</Callout>
+
+PROCESIO integrates Read Mailbox action with your email server configurations. This means that once you configure the Read Mailbox server to use (check Working with Credentials Manager), you can start configuring the Read Mailbox action in any process. 
+
+Use this action to filter your received emails as needed, by:
+
+- subject
+- from
+- body
+- to, bcc, cc
+- deliveredAfter (retrieves emails that were received after a certain date) 
+- deliveredBefore (retrieves emails that were received before a certain date)
+- deliveredOn (retrieves emails that were received on a certain date)
+
+<Callout type="info">
+You can also apply filters only for unread emails or those with attachments.&#x20;
+</Callout>
+
+<Callout type="warn">
+**Note**: For POP3, the unread filter will have no impact, because there is a limitation of the POP3 protocol.
+</Callout>
+
+<Callout type="info">
+This action requires a credential of type '**SMTP Inbound configuration**'. Check [documentation](https://docs.procesio.com/integrations/gmail-incoming).&#x20;
+</Callout>
+
+### Filter Rules:
+
+- Multiple filters are allowed and every filter should be added on a new row
+- After each filter name, you can add a colon (**:**) or just white space
+- The names of the filters can be written in upper or lower case
+
+**&#x20;                    Example**: FROM/from/From are valid filters;
+
+- The date format for deliveredAfter/deliveredBefore/deliveredOn is: **YY/MM/DD&#x20;**&#x6F;r **MM/DD/YY**
+- If no filter is provided, all the emails will be retrieved.
+
+**Example**:&#x20;
+
+from: [name234@test.com]()
+
+DeliveredAfter  2022-09-02 
+
+subject My subject
+
+The filter will retrieve all the emails that were received after August 2, 2022, from "[name234@test.com]()" and where the subject contains "My subject". You can add only a part of the email address: **name234**.
+
+configure the  Email server to use (check Working with Credentials Manager), you can start configuring the Send Email action in any flow. 
+
+### How to configure the Read Mailbox action?
+
+Go to the Process Designers section and open a new or an existing process. Actions configuration can be performed once they are dragged and dropped on canvas.
+
+![](/images/docs/rN-yiQRzkM5LLx7CLvOph_image.png)
+
+**Step 1**: Drag the Read Mailbox action from Toolbar and drop it on canvas; click on the action to open the Properties Panel.
+
+**Step 2**: You can edit the Action Name.
+
+**Step 3**: Select the **SMTP Inbound server&#x20;**&#x63;onfiguration in the properties panel. The  Read Mailbox server configuration may be created upfront in Credentials Manager or you can create one by pressing 'Create credential'.
+
+![](/images/docs/-QNzcItWRqwVcVflr0PdH_screenshot-2022-08-23-at-162405.png)
+
+<Callout type="info">
+If the desired email server configuration is not created upfront, you have a shortcut in the selector to proceed to the Credentials Manager page.
+</Callout>
+
+**Step 4**: Add your filters (see Filter Rules above) to the editor. You can apply filters only to unread emails or to those that have attachments by checking the corresponding box/es.
+
+**Step 5**: Create a process variable that will store the retrieved email information.
+
+<Callout type="info">
+Use the data type `InboundEmailInformation`when creating this output variable, and mark it as a list.&#x20;
+</Callout>
+
+![](/images/docs/35j0Uke2qWiEcxjor3RbY_screenshot-2022-08-23-at-163833.png)
+
+This configuration will retrieve my unread emails, received from JIRA on 08-11-2022, and will store the data in the `resultedEmails` process variable.

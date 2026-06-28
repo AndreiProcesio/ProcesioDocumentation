@@ -1,0 +1,42 @@
+---
+title: "Radio Button"
+description: "The Radio Button element presents a set of mutually exclusive options, allowing the user to select exactly one choice from a group. It is the go-to…"
+---
+
+The Radio Button element presents a set of mutually exclusive options, allowing the user to select exactly one choice from a group. It is the go-to element when the options are finite, well-known, and should all be visible at a glance without requiring the user to open a dropdown.
+
+Like the Select Input, the Radio Button supports three source types for populating its options: a static list defined at design time, a JSON object, or a live URL endpoint — enabling dynamic option sets that can be updated at runtime. The currently selected value and the option list itself are both part of the element's data model and can be manipulated in any Procesio Forms event.
+
+## Key Use Cases
+
+•        Priority selection (Low / Medium / High), gender, or response type fields
+
+•        Approval routing choices — e.g., 'Approve', 'Reject', 'Escalate'
+
+•        Dynamically updating options from an API on form load to reflect real-time data
+
+•        Pre-selecting a value from a process variable and displaying it as read-only
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad, onChange, or custom triggers.*
+
+
+
+| **API Name**     | **Description**                                        | **Type**      | **Default** | **Notes**              |
+| ---------------- | ------------------------------------------------------ | ------------- | ----------- | ---------------------- |
+| **label**        | Display label for the radio group                      | string        | —           | —                      |
+| **tooltip**      | Help text shown alongside the label                    | string        | —           | —                      |
+| **infotext**     | Supplementary info displayed below the group           | string        | —           | —                      |
+| **defaultvalue** | Initially selected value on form load                  | any           | —           | —                      |
+| **value**        | Currently selected value — read or set at runtime      | any           | —           | —                      |
+| **readonly**     | View-only — user cannot change selection               | boolean       | false       | —                      |
+| **disabled**     | Fully non-interactive                                  | boolean       | false       | —                      |
+| **visible**      | Controls element visibility                            | boolean       | true        | —                      |
+| **name**         | Unique element name                                    | string        | —           | —                      |
+| **id**           | Unique element ID                                      | string        | —           | —                      |
+| **required**     | A value must be selected to submit                     | boolean       | false       | —                      |
+| **sourcetype**   | How options are provided                               | string        | —           | static list, json, url |
+| **sourcevalue**  | The actual option data matching the chosen source type | string\|array | —           | —                      |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

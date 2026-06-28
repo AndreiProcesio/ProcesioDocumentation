@@ -1,0 +1,140 @@
+---
+title: "Your first Custom action"
+description: "In the following article we will learn how to create a simple Custom action and how to add it to our flow."
+---
+
+In the following article we will learn how to create a simple Custom action and how to add it to our flow.
+
+&#x20; 1\.    Open Visual Studio.
+
+&#x20; 2\.    Create a **New project** of type **Class Library (.Net 8)**.
+
+&#x20; 3\.    In this example we will call the action FullName.
+
+&#x20; 4\.    Add the nuget to your project:
+
+- go to **Tools → Nuget Package Manager → Manage NuGet Packages for Solution**
+- from Package Source select your Github connection
+- from Browse select the **Ringhel.Procesio.Action.Core** package
+- check the name of your project and click Install
+
+![](/images/docs/b26OiyW59i9_b2BKtXJff_image.png)
+
+&#x20; 5\.    In the Solution explorer right click on your project and select **Edit project file** and replace the text with.
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetsForTfmSpecificBuildOutput>
+      $(TargetsForTfmSpecificBuildOutput);IncludeDepsInPackage
+    </TargetsForTfmSpecificBuildOutput>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>
+      $(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb;.json
+    </AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <Version>1.0.0.1</Version>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Ringhel.Procesio.Action.Core" Version="1.19.2" />
+  </ItemGroup>
+
+  <Target Name="IncludeDepsInPackage">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(OutDir)*" />
+    </ItemGroup>
+  </Target>
+</Project>
+```
+
+<Callout type="error">
+If you choose to use the following optional tags, you will need to update them manually when you create a new build in the same way as you update the **Version** tag or the changes will not appear in the new build.&#x20;
+
+```xml
+<AssemblyVersion>1.0.0.1</AssemblyVersion>
+<FileVersion>1.0.0.1</FileVersion>
+```
+</Callout>
+
+
+
+&#x20; 6\.  Create your custom action in a new class.
+
+&#x20; 7\.  Include the following namespaces in your Custom Action class definition.
+
+```csharp
+using System;
+using System.Threading.Tasks;
+using Ringhel.Procesio.Action.Core.Models;
+using Ringhel.Procesio.Action.Core;
+using Ringhel.Procesio.Action.Core.ActionDecorators;
+using Ringhel.Procesio.Action.Core.Utils;
+```
+
+&#x20; 8\.    We will provide you the full code for a custom action that will concatenate two strings that will be provided as inputs.
+
+```csharp
+namespace ConcatenateAction
+{
+    [ClassDecorator(Name = "Name of Action", Shape = ActionShape.Square, Description = "Description of the custom action", Classification = Classification.cat1, Tooltip = "Tooltip of the action", IsTestable = false)]
+    [FEDecorator(Label = "Configure formatting", Type = FeComponentType.Side_pannel, Tab = "Presentation",Parent = "Side_Panel_Parent", RowId = 1)]
+    [Permissions(CanDelete = true, CanDuplicate = true, CanAddFromToolbar = true)]
+    public class Concatenate : IAction
+    {
+        [FEDecorator(Label = "First name", Type = FeComponentType.Text, Parent = "Side_Panel_Parent", RowId = 1)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public string FirstName { get; set; }
+        [FEDecorator(Label = "Last name", Type = FeComponentType.Text, Parent = "Side_Panel_Parent", RowId = 2)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public string LastName { get; set; }
+        [FEDecorator(Label = "String after format", Type = FeComponentType.Text, Parent = "Side_Panel_Parent", RowId = 3)]
+        [BEDecorator(IOProperty = Direction.Output)]
+        [Validator(IsRequired = true)]
+        public string FullName { get; set; }
+        public async Task Execute()
+        {
+            FullName = string.Concat(FirstName, " ", LastName);
+        }
+    }
+}
+```
+
+<Callout type="warn">
+You have the following class attributes that if set as **true** will give your action extra functionality, we advise that you set them to true. If the **CanAddFromToolbar** is set as **false** in your code the action will not appear in the platform.
+</Callout>
+
+&#x20; 9\.    The above code can be altered to create your own specific custom action or left as is.
+
+&#x20; 10\.   To generate your own nuget you will need to right click your project in the Solution explorer and select Properties and in the Package section you will need to:
+
+- check Generate Nuget package on build
+- before each build you will need to come here and change the Package version, for example from 1.0.0.0 to 1.0.0.1
+
+![](/images/docs/-1ZVyo_UCmhSVRkmlGzud_image.png)
+
+&#x20; 11\.   From the Visual Studio main menu select Build Solution from the Build dropdown.
+
+![](/images/docs/YwIz1fsWNbMzoA79q65Z9_image.png)
+
+&#x20; 13\.   To add the Custom action to your project switch to the **Custom actions** section.
+
+![](/images/docs/AYtLc1bJlYWpHViwZ6RPk_image.png)
+
+&#x20; 14\.   Click the **Create custom action** button on the bottom left corner.
+
+![](/images/docs/Mo5qhQe4Cack4dEqftzzk_image.png)
+
+&#x20; 15\.   Give the action a name and upload or drag and drop the file and click **Save**.
+
+![](/images/docs/VzxV0FuZTnJ1E9zTL_X6V_image.png)
+
+&#x20; 16\.   The newly created Custom action will appear in the Custom actions list and you can drag it on the canvas like any other action.
+
+<Callout type="info">
+We provided the code used to create the custom actions present on the platform on [Github](https://github.com/PROCESIO/Custom-Actions/tree/main/StringActions).
+</Callout>

@@ -1,0 +1,34 @@
+---
+title: "Section"
+description: "The Section element is a structural container that groups related form elements under a common labeled area. Think of it as a visual and logical…"
+---
+
+The Section element is a structural container that groups related form elements under a common labeled area. Think of it as a visual and logical divider — it wraps a set of fields into a named block, making complex forms easier to scan, understand, and navigate for end users.
+
+Sections are especially useful for long forms where you want to organize inputs into logical groups (e.g., Personal Information, Billing Details, Attachments) without resorting to multi-step flows. Because the visible attribute is part of the element's data model in Procesio Forms, entire sections can be shown or hidden dynamically based on user choices or process outputs — enabling conditional form sections without any custom code.
+
+## Key Use Cases
+
+•        Grouping related fields visually (e.g., 'Shipping Address', 'Payment Details')
+
+•        Showing or hiding entire form sections at runtime based on a select input or checkbox
+
+•        Organizing approval forms into 'Request Details' and 'Review & Decision' sections
+
+•        Using multiple sections as pseudo-steps in a single-page form layout
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad or onChange.*
+
+
+
+| **API Name** | **Description**                                      | **Type** | **Default** | **Notes** |
+| ------------ | ---------------------------------------------------- | -------- | ----------- | --------- |
+| **label**    | The section's header/title text                      | string   | —           | —         |
+| **tooltip**  | Help text shown alongside the section label          | string   | —           | —         |
+| **visible**  | Show or hide the entire section and all its children | boolean  | true        | —         |
+| **name**     | Unique element name                                  | string   | —           | —         |
+| **id**       | Unique element ID                                    | string   | —           | —         |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

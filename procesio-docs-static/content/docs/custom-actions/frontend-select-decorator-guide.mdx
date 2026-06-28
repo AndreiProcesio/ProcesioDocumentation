@@ -1,0 +1,122 @@
+---
+title: "Frontend Select decorator guide"
+description: "The select decorator allows you to select your inputs from a predefined list inside your custom action."
+---
+
+The select decorator allows you to select your inputs from a predefined list inside your [custom action](https://docs.procesio.com/custom-actions/your-first-custom-action).
+
+In the following example we will create a custom action that will allow us to calculate the sum of three numbers, two will be selected from a dropdown and a third one will be added manually.
+
+&#x20; 1\.     First, you will need to handle the [minimum requirements](https://docs.procesio.com/custom-actions/prerequisites-and-environment-setup)  for your project by using the Procesio nuget and editing the project file.
+
+&#x20; 2\.     The libraries required by this custom action are:
+
+```csharp
+using System;
+using System.Threading.Tasks;
+using Ringhel.Procesio.Action.Core.Models;
+using Ringhel.Procesio.Action.Core;
+using Ringhel.Procesio.Action.Core.ActionDecorators;
+using Ringhel.Procesio.Action.Core.Utils;
+using System.Collections.Generic;
+```
+
+&#x20; 3.    Create your custom action in a new class and configure the class decorator.
+
+```csharp
+[ClassDecorator(Name = "Name of Action", Shape = ActionShape.Square, Description = "Description of the custom action", Classification = Classification.cat1, Tooltip = "Tooltip of the action", IsTestable = false)]
+[FEDecorator(Label = "Configure formatting", Type = FeComponentType.Side_pannel, Tab = "Presentation",Parent = "Side_Panel", RowId = 1)]
+[Permissions(CanDelete = true, CanDuplicate = true, CanAddFromToolbar = true)]
+```
+
+&#x20; 4\.    Implement the **IAction** interface.
+
+&#x20; 5\.    Create the variables that accept inputs from the list.
+
+```csharp
+[FEDecorator(Label = "First number", Type = FeComponentType.Select, Tab = "Input Tab", Options = "ConfigP1OptionsList", Tooltip = "Tooltip input1", RowId = 1)]
+[BEDecorator(IOProperty = Direction.Input)]
+[Validator(IsRequired = false)]
+public int Input1 { get; set; }
+
+[FEDecorator(Label = "Second number", Type = FeComponentType.Select, Tab = "Input Tab", Options = "ConfigP1OptionsList", Tooltip = "Tooltip input2", RowId = 2)]
+[BEDecorator(IOProperty = Direction.Input)]
+[Validator(IsRequired = false)]
+public int Input2 { get; set; }
+```
+
+&#x20; 6\.    We will also create the third variable that will accept the manual input.
+
+```csharp
+[FEDecorator(Label = "Third number", Type = FeComponentType.Number, Tab = "Input Tab", RowId = 3)]
+[BEDecorator(IOProperty = Direction.Output)]
+[Validator(IsRequired = true)]
+public int Input3 { get; set; }
+```
+
+&#x20; 7\.    Create the variable that will contain the sum of all three.
+
+```csharp
+[FEDecorator(Label = "Result", Type = FeComponentType.Number, Tab = "Input Tab", RowId = 4)]
+[BEDecorator(IOProperty = Direction.Output)]
+[Validator(IsRequired = true)]
+public int Result { get; set; }
+```
+
+&#x20; 8\.    Create a list inside the Custom Action.
+
+```csharp
+private IEnumerable<OptionModel> ConfigP1OptionsList { get; } = new List<OptionModel>()
+        {
+            new OptionModel()
+            {
+                name = "Value 1",
+                value = 1
+            },
+            new OptionModel(){
+                name = "Value 2",
+                value = 2
+            },
+            new OptionModel(){
+                name = "Value 3",
+                value = 3
+            },
+            new OptionModel(){
+                name = "Value 4",
+                value = 4
+            },
+            new OptionModel(){
+                name = "Value 5",
+                value = 5
+            }
+        };
+```
+
+Each option is identified by a name and value that contain the value of the option.
+
+&#x20; 9\.    Inside the execute function we will decide what to do with the variables.
+
+```csharp
+ public async Task Execute()
+        {
+            Result = Input1 + Input2 + Input3;
+        }
+```
+
+&#x20; 10.    Generate and upload the nuget.
+
+&#x20; 11.    Create the result [variable](https://docs.procesio.com/working-with-process-variables).
+
+![](/images/docs/_0kBjh5f_BDL_WWAS_Nmy_image.png)
+
+&#x20; 12\.    Drag the custom label on the canvas and link the actions.
+
+&#x20; 13\.    Select the custom action and enter the values in the Input tab.
+
+![](/images/docs/9Ek-gDGLpZHcI3JHAWUQz_image.png)
+
+&#x20; 14\.    **Save**, **Validate&#x20;**&#x61;nd **Run&#x20;**&#x74;he process.
+
+&#x20; 15\.    Click **Check instances** to view the result.
+
+The code used to create the custom action can be found [here](https://github.com/PROCESIO/PROCESIO-Code-Examples/blob/main/CustomActions/SelectDecorator).

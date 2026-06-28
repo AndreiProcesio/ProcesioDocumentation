@@ -1,0 +1,36 @@
+---
+title: "Heading"
+description: "The Heading element renders a prominent title or section header within a form. It is a pure display element — it outputs styled heading text and…"
+---
+
+The Heading element renders a prominent title or section header within a form. It is a pure display element — it outputs styled heading text and carries no data value. Use it to introduce major sections, highlight important instructions, or provide a visual title that anchors a block of related fields.
+
+Because its label is part of the data model in Procesio Forms, the heading text can be updated dynamically at runtime — useful for personalizing a form (e.g., 'Welcome, John') or reflecting the current state of a process (e.g., displaying the name of the record being reviewed).
+
+## Key Use Cases
+
+•        Section titles within long forms to improve scannability
+
+•        Personalizing a greeting at form load by setting label from a process variable
+
+•        Displaying the name of the record, case, or request being acted on
+
+•        Conditionally showing a warning header when specific conditions are met
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms.*
+
+
+
+| **API Name** | **Description**                                  | **Type** | **Default** | **Notes** |
+| ------------ | ------------------------------------------------ | -------- | ----------- | --------- |
+| **label**    | The heading text content — updateable at runtime | string   | —           | —         |
+| **tooltip**  | Help text shown alongside the heading            | string   | —           | —         |
+| **visible**  | Controls element visibility                      | boolean  | true        | —         |
+| **name**     | Unique element name                              | string   | —           | —         |
+| **id**       | Unique element ID                                | string   | —           | —         |
+
+
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

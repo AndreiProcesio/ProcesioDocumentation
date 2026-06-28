@@ -1,0 +1,25 @@
+---
+title: "Backend decorator"
+description: "The backend decorator tells the platform what you want to do with the values stored inside the variables used by your custom action."
+---
+
+The backend decorator tells the platform what you want to do with the values stored inside the variables used by your custom action.
+
+```csharp
+[BEDecorator(IOProperty = Direction.Output)]
+```
+
+The IOProperty property allows you to choose one of four possible directions, that will give you more control on over your custom action:
+
+```text
+        NONE = 0,
+        Input = 1,
+        InputOutput = 2,
+        Output = 3,
+```
+
+The most useful are Input and Output. While using **Input** the custom action expects to receive the value from the user and with **Output** it will return a value that could be one or more inputs that were used internally.
+
+The **None** option is the default if the IOProperty is not mentioned.
+
+The InputOutput option is used when a property needs to be both input and output, because it must first receive a value before it uses it in the backend.

@@ -1,0 +1,48 @@
+---
+title: "Custom action decorators"
+description: "A decorator is a structural pattern that allows adding new behaviors to objects dynamically by placing them inside special wrapper objects. Using…"
+---
+
+A decorator is a structural pattern that allows adding new behaviors to objects dynamically by placing them inside special wrapper objects. Using decorators you can wrap both objects and decorators because they follow the same interface.
+
+To assist users in creating their own custom actions Procesio  has made available on Github a [Action Core](https://github.com/PROCESIO/Action-Core) library that allows you to make use of both frontend and backend decorators. 
+
+The correct use of decorators is mandatory in order for your custom actions to be accepted by the platform, a simple implementation of a custom action is explained [here](https://docs.procesio.com/custom-actions/your-first-custom-action).
+
+The first decorator that you will use must be the [class decorator](https://docs.procesio.com/custom-actions/class-decorator), this attribute is used to define some basic information about the action.
+
+```csharp
+[ClassDecorator(Name = "Name of Action", Shape = ActionShape.Square, 
+Description = "Description of the custom action", Classification = Classification.cat1, 
+Tooltip = "Tooltip of the action", IsTestable = false)]
+```
+
+If you will need to test the action with a test value, for example if a string has any characters you could use **string.IsNullOrEmpty** inside a custom action and the result will be added inside a Boolean. The class decorator property that will be used is [IsTestable](https://github.com/PROCESIO/Action-Core/blob/development/Ringhel.Procesio.Action.Core/ActionDecorators/ClassDecoratorAttribute.cs):
+
+```csharp
+[ClassDecorator(Name = "Name of Action", Shape = ActionShape.Square, 
+Description = "Description of the custom action", Classification = Classification.cat1, 
+Tooltip = "Tooltip of the action", IsTestable = true)]
+```
+
+Frontend decorators are responsible of creating the visuals of the action with which you will interact in the platform, visuals like the Modal, input tabs, checkboxes whose position and order can be controlled with the use of **RowId**. The full list of frontend decorators and their use can be found [here](https://github.com/PROCESIO/Action-Core/blob/development/Ringhel.Procesio.Action.Core/ActionDecorators/FEDecoratorAttribute.cs).
+
+```csharp
+[FEDecorator (Label= "Configure formatting", Type = FeComponentType.Side_pannel, Tab = "Presentation", Parent = "Side_Panel_Parent", RowId = 1)]
+```
+
+Backend decorators provide information on how the data will be used inside the platform showing the direction of the data.
+
+```csharp
+[BEDecorator(IOProperty = Direction.Output)]
+```
+
+```csharp
+[BEDecorator(IOProperty = Direction.Input)]
+```
+
+The validator decorator describes the conditions that need to be respected, conditions like the data type or if it is mandatory.
+
+<Callout type="info">
+You can find a more complex example of how to use decorators [here](https://github.com/PROCESIO/Action-Core/blob/development/Ringhel.Procesio.Action.Core/TemplateAction/CustomTemplateAction.cs).
+</Callout>

@@ -1,0 +1,39 @@
+---
+title: "Signature Pad"
+description: "The pad's interactivity can be controlled at runtime — locked to read-only to display a previously captured signature, disabled to prevent…"
+---
+
+### The Signature Pad element provides a touch and mouse-friendly canvas where users can draw their handwritten signature directly within the form. The captured signature is stored as a file (image) and passed into the process as part of the form submission, making it suitable for digital approval flows, consent acknowledgments, contracts, and any scenario requiring a personal sign-off.
+
+The pad's interactivity can be controlled at runtime — locked to read-only to display a previously captured signature, disabled to prevent interaction, or hidden entirely when not applicable to the current form state. The current signature value is accessible through the data model in Procesio Forms at any event.
+
+## Key Use Cases
+
+•        Digital signature collection on approval or authorization forms
+
+•        Consent acknowledgment at the end of an onboarding or compliance flow
+
+•        Displaying a previously captured signature in read-only mode for review
+
+•        Conditionally showing the signature pad only when required (e.g., after clicking Approve)
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad, onChange, or custom triggers.*
+
+
+
+| **API Name**    | **Description**                                | **Type**   | **Default** | **Notes** |
+| --------------- | ---------------------------------------------- | ---------- | ----------- | --------- |
+| **label**       | Display label above the signature pad          | string     | —           | —         |
+| **tooltip**     | Help text shown alongside the label            | string     | —           | —         |
+| **description** | Instructional text displayed near the pad area | string     | —           | —         |
+| **value**       | The current signature as a file object         | file\|null | —           | —         |
+| **readonly**    | View-only — user cannot draw a new signature   | boolean    | false       | —         |
+| **disabled**    | Fully non-interactive                          | boolean    | false       | —         |
+| **visible**     | Controls element visibility                    | boolean    | true        | —         |
+| **name**        | Unique element name                            | string     | —           | —         |
+| **id**          | Unique element ID                              | string     | —           | —         |
+| **required**    | A signature must be drawn to submit the form   | boolean    | false       | —         |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

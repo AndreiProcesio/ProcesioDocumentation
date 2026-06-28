@@ -1,0 +1,101 @@
+---
+title: "Lists and Display rules inside custom actions"
+description: "After creating the Class library (.Net 6) project and adding the Procesio NuGet package you will need to complete the two mandatory requirements in…"
+---
+
+After creating the Class library (.Net 6) project and adding the Procesio NuGet package you will need to complete the two mandatory requirements in order to implement your classes to become proper custom action.
+
+- Inherit the **IAction** interface. This is mandatory because Procesio needs the Execute method in order to run your action within a flow. This is where you will add the logic of whatever behavior you need the action to have.
+- Use proper attributes for your properties to define what type and use they have within your new action. These attributes are necessary for Procesio to create the Action Template, which is like a contract used for the UI to dynamically interpret and display any type of provided action correctly within the platform.
+
+It is important to note that once the custom action is added by uploading your NuGet file it can be used for any of your processes and that it can not be updated, for this you will need to rebuild the NuGet package with a different version number, then create it again in the process designer.
+
+**Example of full properties implementation**
+
+```csharp
+[FEDecorator(Label = "FE Input property", Type = FeComponentType.Select, Tab = "Input Tab", Options = "MyOptionsList")]
+[BEDecorator(IOProperty = Direction.Input)]
+[Validator(IsRequired = false)]
+public int MyInput { get; set; }
+
+[FEDecorator(Label = "FE Output property", Type = FeComponentType.Number, Tab = "Output Tab", DefaultValue = "2")]
+[BEDecorator(IOProperty = Direction.Output)]
+[Validator(IsRequired = true, Expects = ExpectedType.Number)]
+public int MyOutput { get; set; }
+```
+
+The accepted types for a property are:
+
+- int
+- string
+- boolean
+- double
+- DateTime
+
+We do not accept at this point user defined types or Nullable types. The value of a property in the designer will be the DefaultValue from the FEDecorator. If that property is not required via the Validator decorator and  DefaultValue is not defined either, then we will use the default value of the corresponding data type from C# (0 for int and double, false for boolean, etc.). The same applies if the default value is deleted by the user and no other value is specified. 
+
+### **Using lists**
+
+To use a list inside a Custom Action, one would have to define an IEnumerable property of the required type. To this end, there are several cases where this applies:
+
+**&#x20;   1.  List of primitive data type**
+
+```csharp
+IEnumerable<int> NumericList {get; set;}
+```
+
+The list usage is quite straightforward in this case.
+
+**&#x20;    2.  List of custom data type**
+
+```csharp
+IEnumerable<JObject> MyCustomList {get;set;}
+```
+
+This list is a classic IEnumerable of objects, but their content is dynamic, receiving a JSON value as input. The action developer must know the JSON structure to work with.
+
+**&#x20;     3.  List of files**
+
+```csharp
+IEnumerable<FileModel> FileList {get; set;}
+```
+
+This is a list of files, where each file is sent as a data stream, accessible through the Action.Core.FileModel type. 
+
+The FileModel type has only two properties: Name and File. The Name property holds the file name, and the File property holds the file stream which can be used to retrieve the file content.
+
+Example in using the file stream when iterating through the File list:
+
+```csharp
+foreach(var file in FileList)
+{
+    _ = file.Name; // this is the file name if required.
+
+    _ = file.File; // this is the file Stream which can be used to retrieve file content.
+
+    // example of file stream use:
+
+    using System.IO.Stream fileStream = file.File;
+
+    Console.WriteLine($"File stream has length of: {fileStream.Length}");
+}
+```
+
+### **Display rules**
+
+To control the order in which the frontend components will be displayed, we use the OrderId and RowID properties. The OrderId applies to Tab components and it controls the order in which tabs are displayed. The RowId controls the order of the components inside a parent (a tab, modal, or side panel). All components inside a parent component should have a unique RowID, otherwise, the display order will be inconsistent. Multiple components can have the same RowId as long as they belong to different parent components. An example of usage is:
+
+```csharp
+//Use OrderId to specify the order in which tabs should be displayed
+[FETabDecorator(TabName = "Details", OrderId = 1)]
+
+//Use RowId to specify the order in which components inside a parent 
+//should be displayed
+[FEDecorator(Label = "Value to increment", Type = FeComponentType.Number, Tab = "Details", RowId = 1)]
+```
+
+Another [use case](https://github.com/PROCESIO/PROCESIO-Code-Examples/blob/main/CustomActions/ListSort.cs) for a custom action would be to order ascending or descending a list of numbers that you input in your flow.
+
+![](/images/docs/7EpeKJVq2NSHBNdX8bOa2_numberlistsort.png)
+
+Besides the examples provided in this document, you can also follow the given example of custom actions provided by the Procesio Core project - [Custom template action.](https://github.com/PROCESIO/Action-Core/blob/development/Ringhel.Procesio.Action.Core/TemplateAction/CustomTemplateAction.cs)

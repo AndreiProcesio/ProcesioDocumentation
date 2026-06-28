@@ -1,0 +1,101 @@
+---
+title: "User Permissions and Roles Management"
+description: "This system allows for detailed management of user permissions, enabling or restricting access to various features and actions within a workspace…"
+---
+
+This system allows for detailed management of user permissions, enabling or restricting access to various features and actions within a workspace environment. User permissions are determined by their assigned user type, which comes with a predefined set of roles. Users with certain privileges can modify these permissions for themselves or others, ensuring a flexible and secure workflow.
+
+Users are categorized into different groups or "user types," each with a specific set of default permissions. When a user’s type is changed, all their permissions are reset to the defaults for that user type.
+
+**User Types Overview:**
+
+1. **Owner**
+   - **Permissions:**
+     - Admin role on master workspace, workspace, and all design & process entities.
+2. **Co-Owner**
+   - **Permissions:**
+     - Write role on master workspace.
+     - Admin role on workspace and all design & process entities.
+3. **Admin**
+   - **Permissions:**
+     - Admin role on workspace and all design & process entities.
+4. **Member**
+   - **Permissions:**
+     - Read role on workspace.
+     - Write role on all design & process entities.
+5. **Basic**
+   - **Permissions:**
+     - Read role on workspace.
+     - No permissions on design & process entities.
+
+**Note:** Owners and Co-Owners can set the default user type for new users in sub-workspaces.
+
+Each user type is associated with roles that define their permissions for different entities within the system. These roles can be modified to grant or revoke specific actions.
+
+**Role Permissions Overview:**
+
+1. **Admin**
+   - **Permissions:**
+   - &#x20;Create, Read, Update, Delete.
+2. **Write**
+   - **Permissions:**
+   - &#x20;Create, Read, Update.
+3. **Update**
+   - **Permissions:**
+   - &#x20;Read, Update.
+4. **Read**
+   - **Permissions:**
+   - &#x20;Read-only.
+5. **None**
+   - **Permissions:**
+   - &#x20;No access.
+
+**Minimum Authored Permissions:**
+Users cannot have lower permissions on their authored content (content they created) than their assigned role. For instance, if a user has a "Write" role, they must also have "Write" permissions on content they authored.
+
+Each entity within the system has predefined roles that dictate what actions can be performed by users. The roles for entities are consistent across the system to maintain uniform behavior.
+
+**Entity Role Overview:**
+
+- **Master Workspace:**
+  - **Roles:**
+  - &#x20;Write, Admin.
+  - **Permissions:**
+  - &#x20;Manage workspaces, set default user types, manage subscriptions.
+- **Workspace:**
+  - **Roles:**
+  - &#x20;Read, Write, Admin.
+  - **Permissions:**
+  - &#x20;View dashboard, manage users, update roles.
+- **Design & Process Entities:**
+  - **Roles:**
+  - &#x20;None, Read, Update, Write, Admin.
+  - **Permissions:**
+  - &#x20;View, edit, add, or delete entities.
+- **Other Entities (e.g., Data Models, Credentials, API Keys, etc.):**
+  - **Roles:**
+  - &#x20;None, Read, Update, Write, Admin.
+  - **Permissions:**
+  - &#x20;Similar structure as above, tailored to the specific entity.
+
+**Note:** Users cannot assign roles higher than their own role on the same entity.
+
+Users with the necessary rights can manage permissions for other users. This includes assigning user types, modifying roles, and setting default permissions for new users in sub-workspaces.
+
+**Key Points:**
+
+- **Updating User Type:**
+- &#x20;When a user’s type is updated, their permissions revert to the defaults for that type.
+- **Default Roles:**
+- &#x20;Owners and Co-Owners can specify default roles for new users in sub-workspaces.
+- **Role Management:**
+- &#x20;Admins can update user roles but cannot assign roles higher than their own.
+
+In future updates, custom user types with granular roles per entity will be introduced, allowing for even more tailored permission management.
+
+**Custom User Type Features:**
+
+- **Custom Roles:**
+- &#x20;Owners/Co-Owners can create and assign custom roles.
+- **Granular Permissions:**
+- &#x20;More specific permissions can be defined for custom roles.

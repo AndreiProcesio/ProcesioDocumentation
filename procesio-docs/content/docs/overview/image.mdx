@@ -1,0 +1,44 @@
+---
+title: "Image"
+description: "The Image element embeds a visual asset directly within a form. It can display any image from a web URL, a base64-encoded data string, or a file…"
+---
+
+The Image element embeds a visual asset directly within a form. It can display any image from a web URL, a base64-encoded data string, or a file reference — making it suitable for static branding assets, dynamic previews of uploaded content, process-generated visual outputs, or any scenario where a picture communicates what text cannot.
+
+The element is fully configurable: you can set the display size (width, height), control the aspect ratio, add accessibility alt text, and even make the image a clickable link (linkurl / linkurltarget). Since src is part of the data model in Procesio Forms, the image source can be swapped at runtime — for example, showing a user's profile picture loaded from a process, or rendering a dynamic chart image returned by an API.
+
+## Key Use Cases
+
+•        Displaying a company logo or branding at the top of a form
+
+•        Showing a preview of a file uploaded in the same form (src set from value of File Upload)
+
+•        Rendering a dynamic chart, map, or QR code returned by a process action
+
+•        Making an image a clickable link to a related document or external resource
+
+•        Displaying a product image when a user selects a product in a dropdown
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms.*
+
+
+
+| **API Name**      | **Description**                                      | **Type**     | **Default** | **Notes**                |
+| ----------------- | ---------------------------------------------------- | ------------ | ----------- | ------------------------ |
+| **label**         | Optional label text displayed with the image         | string       | —           | —                        |
+| **tooltip**       | Help text shown alongside the image                  | string       | —           | —                        |
+| **visible**       | Controls element visibility                          | boolean      | true        | —                        |
+| **src**           | Image source — URL, base64 string, or file reference | string\|file | —           | Updatable at runtime     |
+| **alt**           | Accessible alternative text for the image            | string       | —           | —                        |
+| **title**         | Title text shown on hover                            | string       | —           | —                        |
+| **width**         | Display width of the image                           | string       | auto        | px, %, etc.              |
+| **height**        | Display height of the image                          | string       | auto        | px, %, etc.              |
+| **aspectratio**   | Controls the image's aspect ratio                    | string       | auto        | e.g. auto, 16/9          |
+| **linkurl**       | Makes the image a clickable link                     | string       | —           | —                        |
+| **linkurltarget** | Where the link opens                                 | string       | —           | self, blank, parent, top |
+| **name**          | Unique element name                                  | string       | —           | —                        |
+| **id**            | Unique element ID                                    | string       | —           | —                        |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

@@ -1,0 +1,34 @@
+---
+title: "Paragraph"
+description: "The Paragraph element renders a block of body text within a form. Like the Heading, it is a pure display element — it shows text to the user but…"
+---
+
+The Paragraph element renders a block of body text within a form. Like the Heading, it is a pure display element — it shows text to the user but captures no input. Use it for instructions, disclaimers, explanatory notes, or any prose content that provides context for the fields around it.
+
+Because its label attribute is part of the data model in Procesio Forms, paragraph content can be updated at runtime — enabling dynamic instructions, contextual guidance that changes based on process state, or even simple computed summaries displayed as readable text.
+
+## Key Use Cases
+
+•        Instructions at the top of a form or form section
+
+•        Legal disclaimers or terms text before a signature or checkbox
+
+•        Dynamically updated guidance text based on the user's selections elsewhere in the form
+
+•        Displaying computed summaries or confirmation messages after a process runs
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms.*
+
+
+
+| **API Name** | **Description**                                    | **Type** | **Default** | **Notes** |
+| ------------ | -------------------------------------------------- | -------- | ----------- | --------- |
+| **label**    | The paragraph text content — updateable at runtime | string   | —           | —         |
+| **tooltip**  | Help text shown alongside the paragraph            | string   | —           | —         |
+| **visible**  | Controls element visibility                        | boolean  | true        | —         |
+| **name**     | Unique element name                                | string   | —           | —         |
+| **id**       | Unique element ID                                  | string   | —           | —         |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

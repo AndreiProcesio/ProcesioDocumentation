@@ -1,0 +1,176 @@
+---
+title: "PROCESIO API Documentation"
+description: "Our REST APIs allow you to integrate with PROCESIO from any other application. We expose 2 APIs: Proxy API and Web API. Use the Proxy API for…"
+---
+
+Our REST APIs allow you to integrate with PROCESIO from any other application. We expose 2 APIs: Proxy API and Web API. Use the Proxy API for connecting to the Authentication Service, and the [Web API](https://webapi.procesio.app/swagger/index.html) to perform operations on your application, such as running a process, or getting a data type configuration.
+
+# Proxy API
+
+Use the [Proxy API](https://auth.procesio.app/swagger/index.html) to reach the Authentication Service. The Authentication Service exposes methods such as authenticate, refreshToken, password change, and password update.
+
+In order to be able to perform any operation on the PROCESIO platform through the Web API, you need to first get an access token from the Proxy API. In order to obtain an access token you can use the POST /api/Authentication method.
+
+The **POST** /api/Authentication method requires the following parameters:
+
+- **realm**: your tenant name (all users are added to "procesio01")
+- **grant\_type**: password
+- **username**: your user name
+- **password**: your user’s password
+- **client\_id**: procesio-ui
+- **client\_secret**: (can be left empty)
+
+If the request is successful, you will receive an access token in the response which you will be able to use to access the Web API services.
+
+Here’s how the request would look like testing through Swagger:
+
+![](/images/docs/BZfEwuOOEQmse04NZLbcB_dev1.png)
+
+And if successful, the response in Swagger will look like this:
+
+![](/images/docs/ekx4NndcnqRs-8mYZCE1D_dev2.png)
+
+For a full list of methods, check Proxy API.  
+
+# Web API
+
+Use the [Web API](https://webapi.procesio.app/swagger/index.html) to interact with the PROCESIO platform. To be able to send requests to the Web API, you need to be authorized with the access token received from the Proxy API (see the previous chapter regarding the Proxy API). The **Authorize** button can be found in the upper right corner.
+
+**Bearer Authentication**
+
+![](/images/docs/XG9gJMUGQofMbjIQopeim_bearer.png)
+
+**API Key Authentication**
+
+![](/images/docs/O9mZmsQrY7-d4UVZoo49u_apik.png)
+
+### How to run a process from an external application?
+
+### Prerequisites
+
+To run the process using a API Key we will require:
+
+- Generate a API Key in PROCESIO.
+
+![](/images/docs/oODNXNcdEbsUsKjsWqCvw_image.png)
+
+- PROCESIO API endpoints can be found here. Additionally we also provide [Swagger for our Web API](https://webapi.procesio.app/swagger/index.html) endpoints which can be tested here.
+- [Postman](https://www.postman.com/downloads/) for sending the request.
+
+### Postman
+
+Configure the request:
+
+&#x20; 1\.    Select Post Method mention the base URL and the endpoint
+
+- **Base URL**: https\://webApi.procesio.app
+- **Endpoint**: /api/Projects/e6bb2d64-2f96-4e43-a84b-b25a08c0764d/run (includes the Process ID)
+
+&#x20; 2\.    In Postman from Headers include:
+
+| **Headers** | **Value**     |
+| ----------- | ------------- |
+| key         | API key name  |
+| value       | API key value |
+| workspaceId | workspace Id  |
+
+![](/images/docs/HJNCC4vbXk8qodE_CA1Ah_image.png)
+
+&#x20; 3\.    In Postman from Body, raw, include: 
+
+`&#123;
+`
+`     "payload": &#123;&#125;,
+ `
+`     "connectionId": null
+ `
+`}`
+
+<Callout type="info">
+In the payload add the input variables for the process as displayed in the screenshot below
+</Callout>
+
+&#x20; 4\. Selec&#x74;**&#x20;JSON**
+
+![](/images/docs/qkGCj9zkmA6qhVRE9I46b_image.png)
+
+&#x20; 5\. From Postman hit the **Send&#x20;**&#x62;utton in order to trigger the process for which you configured the request.
+
+### Once authorized to the WebAPI, you have access to the following services:
+
+| **Service** | **Method type** | **Method name**                                  | **Description**                                                                                                                                                                                                                                       |
+| ----------- | --------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Actions     | GET             | /api/Actions/folders/\&#123;id&#125;                       | Returns the full path to the process.                                                                                                                                                                                                                 |
+| Actions     | DELETE          | /api/Actions/folders/\&#123;id&#125;                       | Deletes the folder containing the process with all its content.                                                                                                                                                                                       |
+| Actions     | GET             | /api/Actions/folders                             | Returns directory tree of the workspace.                                                                                                                                                                                                              |
+| Actions     | POST            | /api/Actions/folders                             | Add a new folder in your workspace.                                                                                                                                                                                                                   |
+| Actions     | PATCH           | /api/Actions/folders/rename                      | Renames node inside your workspace.&#xD;                                                                                                                                                                                                              |
+| Actions     | GET             | /api/Actions/templates/\&#123;id&#125;                     | Returns information about the template.&#xD;                                                                                                                                                                                                          |
+| Actions     | DELETE          | /api/Actions/templates/\&#123;id&#125;                     | Deletes the specified template.&#xD;                                                                                                                                                                                                                  |
+| Actions     | POST            | /api/Actions/templates                           | Creates a new template in your workspace.                                                                                                                                                                                                             |
+| Actions     | GET             | /api/Actions/\&#123;id&#125;                               | Returns information about the action.&#xD;                                                                                                                                                                                                            |
+| Actions     | DELETE          | /api/Actions/\&#123;id&#125;                               | Deletes the specified action.&#xD;                                                                                                                                                                                                                    |
+| Actions     | GET             | /api/Actions                                     | Returns list of actions.                                                                                                                                                                                                                              |
+| Actions     | POST            | /api/Actions                                     | Add a new action in your workspace.                                                                                                                                                                                                                   |
+| Actions     | GET             | /api/Actions/category/\&#123;category&#125;                | Returns information about the category.&#xD;                                                                                                                                                                                                          |
+| Actions     | POST            | /api/Actions/test                                | Creates a new action category.                                                                                                                                                                                                                        |
+| Actions     | GET             | /api/Actions/test/\&#123;id&#125;                          | Returns information about the action in the specified category.&#xD;                                                                                                                                                                                  |
+| Actions     | GET             | /api/Actions/node                                | Returns information about the node content.&#xD;                                                                                                                                                                                                      |
+| ApiKey      | GET             | /api/ApiKey                                      | Returns the api key.                                                                                                                                                                                                                                  |
+| ApiKey      | POST            | /api/ApiKey                                      | Use api key on workspace.                                                                                                                                                                                                                             |
+| ApiKey      | DELETE          | /api/ApiKey                                      | Delete api key.                                                                                                                                                                                                                                       |
+| ApiKey      | DELETE          | /api/ApiKey/\&#123;id&#125;                                | Delete project.                                                                                                                                                                                                                                       |
+| Credentials | GET             | /api/Credentials/types                           | Returns the credential configuration types (REST API, Email Server) with their associated fields (URL, authentication type,..).                                                                                                                       |
+| Credentials | POST            | /api/Credentials/types                           | Creates a new credential configuration type.                                                                                                                                                                                                          |
+| Credentials | GET             | /api/Credentials/types/\&#123;id&#125;                     | Returns the credential fields necessary for a given type.                                                                                                                                                                                             |
+| Credentials | POST            | /api/Credentials/test                            | Tests if a credential configuration is valid.                                                                                                                                                                                                         |
+| Credentials | GET             | /api/Credentials                                 | Returns a list of existing credential configurations.                                                                                                                                                                                                 |
+| Credentials | POST            | /api/Credentials                                 | Creates a new credential configuration.                                                                                                                                                                                                               |
+| Credentials | PUT             | /api/Credentials                                 | Modifies an existing credential configuration.                                                                                                                                                                                                        |
+| Credentials | GET             | /api/Credentials/list/\&#123;templateId&#125;              | Returns information about the template.                                                                                                                                                                                                               |
+| Credentials | GET             | /api/Credentials/\&#123;id&#125;                           | Returns the credential configuration details for a configuration ID.                                                                                                                                                                                  |
+| Credentials | DELETE          | /api/Credentials/\&#123;id&#125;                           | Deletes a credential configuration based on a configuration ID.                                                                                                                                                                                       |
+| Credentials | GET             | /api/Credentials/verbs/\&#123;templateId&#125;             | Returns information about the template.                                                                                                                                                                                                               |
+| Credentials | POST            | /api/Credentials/upload/\&#123;credentialsId&#125;         | Creates a new credential.                                                                                                                                                                                                                             |
+| Credentials | POST            | /api/Credentials/upload/test                     | Creates a new category of credentials.                                                                                                                                                                                                                |
+| DataTypes   | POST            | /api/DataTypes                                   | Creates a new data type.                                                                                                                                                                                                                              |
+| DataTypes   | PUT             | /api/DataTypes                                   | Modifies an existing data type.                                                                                                                                                                                                                       |
+| DataTypes   | GET             | /api/DataTypes                                   | Returns a list of available data types in the tenant.                                                                                                                                                                                                 |
+| DataTypes   | GET             | /api/DataTypes/\&#123;id&#125;                             | Returns the attributes of a data type for a data type id.                                                                                                                                                                                             |
+| DataTypes   | DELETE          | /api/DataTypes/\&#123;id&#125;                             | Deletes a data type based on the data type ID.                                                                                                                                                                                                        |
+| DataTypes   | GET             | /api/DataTypes/\&#123;value&#125;                          | Returns the properties of a data type based on the data type name.                                                                                                                                                                                    |
+| DataTypes   | GET             | /api/DataTypes/primary                           | Returns a list of primitive data types available on the platform.                                                                                                                                                                                     |
+| DataTypes   | GET             | /api/DataTypes/primary/count                     | Returns the number of primitive data types available on the platform.                                                                                                                                                                                 |
+| File        | POST            | /api/File/upload/flow                            | Upload flow.                                                                                                                                                                                                                                          |
+| File        | POST            | /api/File/upload/testAction                      | Upload action.                                                                                                                                                                                                                                        |
+| File        | GET             | /api/File/download                               | Download file.                                                                                                                                                                                                                                        |
+| File        | POST            | /api/File/upload/schedule                        | Upload flow.                                                                                                                                                                                                                                          |
+| Projects    | POST            | /api/Projects                                    | Create a process.                                                                                                                                                                                                                                     |
+| Projects    | PUT             | /api/Projects                                    | Modify a process.                                                                                                                                                                                                                                     |
+| Projects    | GET             | /api/Projects                                    | Returns a list of processes.                                                                                                                                                                                                                          |
+| Projects    | POST            | /api/Projects/validate                           | Validates a process.                                                                                                                                                                                                                                  |
+| Projects    | DELETE          | /api/Projects/\&#123;id&#125;                              | Deletes a process based on the ID.                                                                                                                                                                                                                    |
+| Projects    | GET             | /api/Projects/\&#123;id&#125;                              | Returns the process configurations based on a process ID.                                                                                                                                                                                             |
+| Projects    | GET             | /api/Projects/\&#123;id&#125;/instances/publish            | Copies a process and creates an instance which is ready to be launched. After publishing the process, use the launch method to execute the instance using the ID returned by this method.<br />Alternatively use the run method to execute a process. |
+| Projects    | GET             | /api/Projects/\&#123;id&#125;/instances                    | Returns a list of process instances for a given process ID.                                                                                                                                                                                           |
+| Projects    | GET             | /api/Projects/instances/\&#123;id&#125;/status             | Returns the status of a process instance.                                                                                                                                                                                                             |
+| Projects    | GET             | /api/Projects/instances/\&#123;id&#125;/launch             | Executes a process instance by instance ID. Note that the process instance is created with the publish method.                                                                                                                                        |
+| Projects    | POST            | /api/Projects/\&#123;id&#125;/run                          | Trigger a process using the process ID.                                                                                                                                                                                                               |
+| Projects    | GET             | /api/Projects/\&#123;id&#125;/payload                      | Returns the payload of specified process.                                                                                                                                                                                                             |
+| Projects    | GET             | /api/Projects/\&#123;id&#125;/used                         | Returns the used resources by the process.                                                                                                                                                                                                            |
+| Projects    | PATCH           | /api/Projects/\&#123;id&#125;/toggle-activation            | Change the state of the project.                                                                                                                                                                                                                      |
+| Resources   | GET             | /api/Resources/used                              | Returns the list of existing resources on the account.                                                                                                                                                                                                |
+| Resources   | GET             | /api/Resources/analytics/processes               | Returns the analytics for all processes.                                                                                                                                                                                                              |
+| Resources   | GET             | /api/Resources/analytics/processes/\&#123;id&#125;/details | Returns info on the process.                                                                                                                                                                                                                          |
+| Resources   | GET             | /api/Resources/analytics/instances/\&#123;id&#125;/details | Returns the analytics of specific instance.                                                                                                                                                                                                           |
+| Resources   | GET             | ​/api​/Resources​/analytics​/users&#xD;          | Returns the user/account analytics information.                                                                                                                                                                                                       |
+| Schedules   | GET             | /api/Schedules                                   | Returns a list of schedules.                                                                                                                                                                                                                          |
+| Schedules   | POST            | /api/Schedules                                   | Create a schedule.                                                                                                                                                                                                                                    |
+| Schedules   | PUT             | /api/Schedules                                   | Modify a schedule.                                                                                                                                                                                                                                    |
+| Schedules   | GET             | /api/Schedules/\&#123;scheduleId&#125;                     | Returns the schedule configurations based on a schedule ID.                                                                                                                                                                                           |
+| Schedules   | DELETE          | /api/Schedules/\&#123;scheduleId&#125;                     | Deletes a process based on the ID.                                                                                                                                                                                                                    |
+| Schedules   | POST            | /api/Schedules/\&#123;scheduleId&#125;/duplicate           | Creates a copy of a schedule based on the ID.                                                                                                                                                                                                         |
+| Schedules   | Patch           | /api/Schedules/\&#123;scheduleId&#125;/status              | Returns the schedule status based on the ID.                                                                                                                                                                                                          |
+| Status      | GET             | /api/Status                                      | Returns the platform status.                                                                                                                                                                                                                          |
+| Version     | GET             | ​/gui​/Version                                   |                                                                                                                                                                                                                                                       |
+| Version     | POST            | ​/gui​/Version                                   |                                                                                                                                                                                                                                                       |

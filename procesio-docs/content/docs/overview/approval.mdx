@@ -1,0 +1,47 @@
+---
+title: "Approval"
+description: "The Approval element is a purpose-built control for formalizing review decisions within Procesio Forms. It presents the reviewer with a clear Approve…"
+---
+
+The Approval element is a purpose-built control for formalizing review decisions within Procesio Forms. It presents the reviewer with a clear Approve / Reject action pair and optionally requires them to leave a comment before their decision is recorded — enforcing accountability and audit-readiness in approval workflows.
+
+Unlike a generic button or radio button, the Approval element captures rich metadata alongside the decision: the reviewer's user object (responseuser), the timestamp of the decision (responsedate), their written comment (comment), and the outcome itself (response). All of this data is part of the element's data model and flows directly into your process for downstream actions such as notifications, escalations, or document generation.
+
+Comment requirements can be made conditional per outcome — you can require a justification on rejection but make it optional on approval, or vice versa, giving you fine-grained control over the governance policy your workflow enforces.
+
+## Key Use Cases
+
+•        Document, purchase order, or leave request approval workflows
+
+•        Multi-level approval chains where each reviewer's response is captured and stored
+
+•        Requiring a written reason for rejection (iscommentrequiredonreject: true) for compliance
+
+•        Reading responseuser and responsedate at runtime to stamp a document or send a notification
+
+•        Pre-filling the description with context-sensitive instructions based on the record being reviewed
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad, onChange, or custom triggers.*
+
+
+
+| API Name                   | Description                                          | Type               | Default | Notes           |
+| -------------------------- | ---------------------------------------------------- | ------------------ | ------- | --------------- |
+| label                      | Display label above the approval control             | string             | —       | —               |
+| tooltip                    | Help text shown alongside the label                  | string             | —       | —               |
+| description                | Instructional text for the reviewer                  | string             | —       | —               |
+| infotext                   | Supplementary info displayed below the element       | string             | —       | —               |
+| visible                    | Controls element visibility                          | boolean            | true    | —               |
+| comment                    | The reviewer's written comment — readable at runtime | string             | —       | —               |
+| responsedate               | Timestamp of when the decision was made              | string\|date\|null | —       | —               |
+| responseuser               | The user who made the decision (id, name, email)     | object\|null       | —       | —               |
+| response                   | The decision outcome — Approve or Reject             | string\|null       | —       | approve, reject |
+| name                       | Unique element name                                  | string             | —       | —               |
+| id                         | Unique element ID                                    | string             | —       | —               |
+| iscommentrequiredonapprove | Forces a comment when approving                      | boolean            | false   | —               |
+| iscommentrequiredonreject  | Forces a comment when rejecting                      | boolean            | false   | —               |
+|                            |                                                      |                    |         |                 |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

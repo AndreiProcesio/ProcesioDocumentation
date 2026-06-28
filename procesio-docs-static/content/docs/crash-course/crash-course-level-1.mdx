@@ -1,0 +1,119 @@
+---
+title: "Crash Course ~ level 1"
+description: "✅ Completion: Upon successful completion, you will unlock the next lesson"
+---
+
+✅ **Completion:** Upon successful completion, you will unlock the next lesson
+
+**This is how the PROCESS looks**
+
+
+
+
+
+
+
+Now here is a breakdown of what you have to do:
+
+1. Log into PROCESIO
+2. Go to your personal workspace
+3. Go to Process Designer, click the "Create New" Button and the blank canvas will open (canvas is the white surface where your work with actions to create process flows)
+4. Name your process (replace Untitled process. You can try "Course 1")
+5. From Platform Action Toolbar, Numerical Folder, drag and drop the **Add operation** on Canvas
+6. From Platform Action Toolbar, Numerical Folder, drag and drop the **Subtract operation** on Canvas
+7. From Platform Action Toolbar, drag and drop the action named **CallSubprocess**
+8. Connect the action as shown in the image above, by dragging and dropping the connecting arrows.
+
+💡Hint: When dropping the arrow for connecting it to the next action, drop it in the center of the action.&#x20;
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+
+7\. Let's Create some variables, by hitting the **Process variables** button, on the top of right side bar.
+
+
+
+8\. Click **Create new variable**, and create the variable "FirstNumber" as shown below:&#x20;
+
+| Name            | Type        | Default value | Single Value/ List | Set as (input/output/none) |
+| --------------- | ----------- | ------------- | ------------------ | -------------------------- |
+| **FirstNumber** | **integer** | **none**      | **single list**    | **input**                  |
+
+
+
+
+
+9\. Add the second Variable named "SecondNumber" with the below specs: 
+
+| Name             | Type        | Default value | Single value/List | Set as (input/output/none)&#xA; |
+| ---------------- | ----------- | ------------- | ----------------- | ------------------------------- |
+| **SecondNumber** | **Integer** | **900**       | **Single value**  | **none**                        |
+
+
+
+10\. Add the third variable named "Result" with the below specs:
+
+| Name       | Type        | Default value | Single value/List | Set as (input/output/none) |
+| ---------- | ----------- | ------------- | ----------------- | -------------------------- |
+| **Result** | **Integer** | **none**      | **Single value**  | **output**​​​​​            |
+
+
+
+
+11\. Add the fourth variable named "Code" with the below specs:
+
+| Name     | Type       | Default value | Single value/List | Set as (input/output/none) |
+| -------- | ---------- | ------------- | ----------------- | -------------------------- |
+| **Code** | **String** | **none**      | **Single value**  | **input**                  |
+
+
+
+Now let's configure each action:
+
+10\. Add a third variable also of type integer named "Result". This variable should be an output variable
+
+11\. Add a forth variable of type string named "Code". This variable will be an input variable.
+
+Now let's configure each action:
+
+1. Select the Add Operation action, hit the "+" sing for assigning variables to each input field.
+   - To the field **FirstNumber** we add the variable FirstNumber
+   - To the field **SecondNumber&#x20;**&#x77;e add the variable SecondNumber
+   - To the field **Result&#x20;**&#x77;e add the variable Result
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+2\. Select the Substract Operation action and configure it as shown below:
+
+- To the fieldFirst Number\*, add the variable Result
+- To the field SecondNumber\*, add the variable SecondNumber
+- To the fieldResult\* , add the variable Result
+
+
+
+3\. Select the CallSubprocess action and configure it as shown below.
+
+- a)Select subprocess: Chapter I - The numerical One
+
+
+
+- b)Once the subprocess selected, hit the Subprocess Configuration card and configure as shown below:
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+
+
+💡 Hint: in the CallSubprocess Action for Output Variables don't forget to remove the fields, as we do not expect an answer from the triggered subprocess.
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+
+Now let's save, validate & run the process. Use below input parameters:
+
+**FirstNumber:&#x20;**`100`
+
+**Code:** `IamNoob`(note that the code is case sensitive)
+
+If you managed to perform correctly the steps and added a correct e-mail address you shall receive further instructions!
+
+### 🕊️Peace!

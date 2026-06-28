@@ -1,0 +1,45 @@
+---
+title: "Text Input"
+description: "The Text Input element is the foundational building block for collecting free-form textual data from users. It supports a wide variety of input modes…"
+---
+
+The Text Input element is the foundational building block for collecting free-form textual data from users. It supports a wide variety of input modes — from plain text to email addresses, URLs, passwords, and search queries — making it adaptable to virtually any data-entry scenario in your form.
+
+Beyond basic text entry, Text Input offers built-in validation through regex patterns, optional read-only and disabled states for display or access-control logic, and rich labeling capabilities including tooltips and informational sub-text. This makes it equally useful for both editable data collection and read-only display of process outputs.
+
+## Key Use Cases
+
+•        Collecting names, descriptions, addresses, and any free-text fields
+
+•        Enforcing email, URL, or password formats via the type attribute
+
+•        Pre-filling values at form load (defaultvalue) and updating them at runtime (value)
+
+•        Displaying read-only computed results from a process by toggling readonly to true
+
+•        Applying regex patterns for custom field validation (e.g., phone numbers, product codes)
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad, onChange, or custom triggers.*
+
+
+
+| **API Name**     | **Description**                                          | **Type**     | **Default** | **Notes**                          |
+| ---------------- | -------------------------------------------------------- | ------------ | ----------- | ---------------------------------- |
+| **label**        | The display label shown above the input field            | string       | —           | —                                  |
+| **placeholder**  | Hint text shown inside the empty input                   | string       | —           | —                                  |
+| **type**         | Controls input mode and browser behavior                 | string       | text        | email, password, search, text, url |
+| **tooltip**      | Help text shown alongside the label (usually as an icon) | string       | —           | —                                  |
+| **infotext**     | Supplementary info displayed below the input             | string       | —           | —                                  |
+| **defaultvalue** | The initial value when the form first loads              | string       | —           | —                                  |
+| **value**        | The current runtime value — read or set programmatically | string       | —           | —                                  |
+| **readonly**     | If true, the user can view but not change the value      | boolean      | false       | —                                  |
+| **disabled**     | If true, the input is fully non-interactive              | boolean      | false       | —                                  |
+| **visible**      | Controls whether the element is shown or hidden          | boolean      | true        | —                                  |
+| **name**         | Unique identifier for referencing this element in logic  | string       | —           | —                                  |
+| **id**           | Unique DOM/element ID                                    | string       | —           | —                                  |
+| **required**     | If true, the form cannot be submitted while empty        | boolean      | false       | —                                  |
+| **regex**        | A regex pattern for custom validation on submission      | string\|null | —           | e.g. ^\[A-Z]\&#123;3&#125;$                  |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

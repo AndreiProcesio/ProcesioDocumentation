@@ -1,0 +1,86 @@
+---
+title: "For Each"
+description: "For Each action performs an action (or a set of actions) included within ForEach border. ForEach action enables you to step through lists and iterate…"
+---
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_3x0_Fgl4_Y" title="Embedded video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+
+For Each action performs an action (or a set of actions) included within ForEach border. ForEach action enables you to step through lists and iterate through the data and process each information (row) individually. 
+
+The elements of a list can be referenced in the action(s) within the border by creating and using a local variable (iterator).
+
+To show how ForEach works, let's create a process that goes through each element of a list (list of contacts and email addresses) and sends emails out to each and one of them.  
+
+### How to configure the For Each action?
+
+Go to the Process Designers section and open a new or an existing process. Actions configuration can be performed once they are dragged and dropped on canvas.
+
+![](/images/docs/F5sJ77XYml2zZKIfILOQf_image.png)
+
+**Step 1**: Drag the **For Each** action from Toolbar and drop it on canvas.
+
+**Step 2**: From the Process Variables **(X)** panel, create a new process variable, called inputData with the following specs:
+
+- type clientDetails  (data model with 3 attributes: *email, name, body* - type string) ;
+- List
+- set as Input
+
+![](/images/docs/rsDHXIP6dU8WXA_HP8OwQ_createvariables.png)
+
+**Step 3:** For Each **Properties Panel** configuration.
+
+![](/images/docs/_KPx-MYbq36D1MyTqP_1H_foreachaction.png)
+
+
+
+1. Select the list to iterate through, i.e. `inputData`&#x20;
+
+In List represents the list of items you want to iterate through. Select from the Process Variables selector a list type variable.  Select the inputData**&#xA0;**&#x6C;ist from the selector: 
+
+![](/images/docs/6O6rd9XXbuksAKELH3YS9_screenshot-2022-06-02-at-200933.png)
+
+&#x20;     2\. Set the iterator name (you can name it iterator etc). &#x20;
+
+*For Each item* represents the item in the list used for each iteration. You can create a local variable by manually entering a name for it. This local variable will be further used in the actions within ForEach. We will name it now "iterator":
+
+![](/images/docs/5u24f2k2wx4Q4JLcCDYXs_screenshot-2022-06-02-at-201114.png)
+
+2\. Action timeout - you can set the maximum number of seconds this action and its enclosing actions are allowed to run for; When time expires, the next iteration will stop the action. Setting the value to 0 means there is no timeout at all, allowing the action to run for an unlimited number of iterations.&#x20;
+
+**Step 4:** After releasing the For Each action on canvas (Step 1), you will notice that it expands by default (becoming a bordered area). All the actions inside this border will be executed for each item in list.
+
+![](/images/docs/CaL7DkYePYFY8dWkTKUhr_linkedactions.png)
+
+<Callout type="info">
+Within the border, you can add any type of action from Toolbar like in any process flow, except for Start and Stop. There is already a Start icon indication from where the For Each action flow starts processing; you have to connect the first action to the Start icon and you cannot delete it. 
+</Callout>
+
+<Callout type="warn">
+The drag\&drop of a "Stop" action within a ForEach loop is currently prohibited, as it would prematurely terminate the entire process after a single iteration. However, a forthcoming action called "Exit ForEach" is being developed specifically to address this need by allowing for a controlled exit from a ForEach loop.
+</Callout>
+
+
+
+Now you can start adding actions within the border. Drag an action from Toolbar and connect it to the Start icon within the border.
+
+![](/images/docs/ZhJ1nm9DfleSlldPgYbw9_linkedactionsithmail.png)
+
+**Step 5:** Add the **Send Email** action within the border - click on it and the corresponding Properties Panel of the action will open.  
+
+In Send Email action configuration, use the iterator variable created to reference each element of the list:
+
+![](/images/docs/VVTuwxwHGrz40ASm26DrY_screenshot-2022-06-02-at-201829.png)
+
+**Step 6:** **Save**, **Validate&#x20;**&#x61;nd **Run&#x20;**&#x74;he process. Give values to the list:
+
+![](/images/docs/hXH-Tdg2GZx-a0s1REFwL_runactionemail.png)
+
+### Run the process.
+
+The For Each action iterates through each of the values specified in the List variable and will send separate emails to each element in the list.
+
+Tips & Tricks: 
+
+- In order to add more actions, you need to resize the border by dragging the bottom-right corner of the border. Add new actions from Toolbar within the border.
+- Ensure the border is wide enough to accommodate the actions you want to drag within its area. 
+- Ensure there is enough space on the canvas to expand the ForEach border. You can move the actions placed on the canvas in order to create space to expand the border.

@@ -1,0 +1,51 @@
+---
+title: "Columns"
+description: "Each Column within the Columns container has its own label and visibility controls, giving you fine-grained layout control. The parent Columns…"
+---
+
+## The Columns element is a layout container that arranges its child elements side by side in a multi-column grid. It is the primary tool for building dense, form-efficient layouts where you want multiple inputs to share the same horizontal row — such as First Name / Last Name, Start Date / End Date, or any pair of related fields.
+
+Each Column within the Columns container has its own label and visibility controls, giving you fine-grained layout control. The parent Columns element also provides a hidelabels option to suppress individual field labels for an even more compact presentation. Both the parent and each individual column's visibility can be toggled at runtime via the data model.
+
+## Key Use Cases
+
+•        Side-by-side first/last name, city/country, or start/end date fields
+
+•        Compact review layouts showing a label column and a value column
+
+•        Conditionally hiding one column to collapse a two-column layout to one
+
+•        Creating responsive-feeling form layouts without custom CSS
+
+## Runtime API — Attributes in Procesio Forms
+
+*Both the Columns container and each individual Column have their own API attributes, all accessible at runtime via the data model.*
+
+
+
+**Columns Container:**
+
+| **API Name**   | **Description**                                     | **Type** | **Default** | **Notes** |
+| -------------- | --------------------------------------------------- | -------- | ----------- | --------- |
+| **hidelabels** | If true, suppresses labels inside all child columns | boolean  | true        | —         |
+| **visible**    | Show or hide the entire columns container           | boolean  | true        | —         |
+| **name**       | Unique element name                                 | string   | —           | —         |
+| **id**         | Unique element ID                                   | string   | —           | —         |
+
+
+
+**Individual Column:**
+
+| **API Name** | **Description**                               | **Type** | **Default** | **Notes** |
+| ------------ | --------------------------------------------- | -------- | ----------- | --------- |
+| **label**    | Display label for this column                 | string   | —           | —         |
+| **tooltip**  | Help text shown alongside this column's label | string   | —           | —         |
+| **visible**  | Show or hide this specific column             | boolean  | true        | —         |
+| **name**     | Unique column name                            | string   | —           | —         |
+| **id**       | Unique column ID                              | string   | —           | —         |
+
+
+
+
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

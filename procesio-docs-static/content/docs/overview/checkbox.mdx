@@ -1,0 +1,44 @@
+---
+title: "Checkbox"
+description: "The Checkbox element captures a simple boolean decision — checked or unchecked — making it the ideal control for consent acknowledgments, feature…"
+---
+
+The Checkbox element captures a simple boolean decision — checked or unchecked — making it the ideal control for consent acknowledgments, feature toggles, optional inclusions, and any yes/no decision in a form.
+
+Its value at any point in time reflects the current checked state and is always accessible through the element's data model in Procesio Forms. You can pre-check it by default (selectedbydefault), lock it as read-only to display a confirmed state, or respond to its change event to trigger downstream logic — such as revealing additional form sections or modifying a process variable.
+
+## Key Use Cases
+
+•        Terms and conditions acceptance, GDPR consent, or opt-in confirmations
+
+•        Toggling visibility of other form sections based on the checked state
+
+•        Displaying a pre-confirmed boolean flag from a process as read-only
+
+•        Including optional items in a request (e.g., 'Include cover page')
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad, onChange, or custom triggers.*
+
+
+
+| **API Name**          | **Description**                                      | **Type** | **Default** | **Notes** |
+| --------------------- | ---------------------------------------------------- | -------- | ----------- | --------- |
+| **label**             | Display label next to the checkbox                   | string   | —           | —         |
+| **tooltip**           | Help text shown alongside the label                  | string   | —           | —         |
+| **infotext**          | Supplementary info displayed below the element       | string   | —           | —         |
+| **selectedbydefault** | If true, the checkbox is pre-checked on load         | boolean  | false       | —         |
+| **value**             | Current checked state — read or set programmatically | boolean  | —           | —         |
+| **readonly**          | View-only — user cannot change state                 | boolean  | false       | —         |
+| **disabled**          | Fully non-interactive                                | boolean  | false       | —         |
+| **visible**           | Controls element visibility                          | boolean  | true        | —         |
+| **name**              | Unique element name                                  | string   | —           | —         |
+| **id**                | Unique element ID                                    | string   | —           | —         |
+| **required**          | If true, the checkbox must be checked to submit      | boolean  | false       | —         |
+
+
+
+
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

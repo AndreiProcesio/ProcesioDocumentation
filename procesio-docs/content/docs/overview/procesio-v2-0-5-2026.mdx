@@ -1,0 +1,92 @@
+---
+title: "PROCESIO v2.0.5 (2026)"
+description: "This release includes several updates focused on usability, form behavior, analytics accuracy, authentication flows, and editor productivity."
+---
+
+# Release Notes — Fixes and Improvements
+
+This release includes several updates focused on usability, form behavior, analytics accuracy, authentication flows, and editor productivity.
+
+## Forms and Form Runtime
+
+### Drag-and-drop file upload support
+
+File Upload controls in Form Runtime now support drag-and-drop behavior correctly. Users can add files by dropping them directly into the upload area.
+
+### Improved form layout handling
+
+Form-related components now handle long process names more reliably, preventing layout overlap and improving readability.
+
+### Refresh button layout fix
+
+The refresh button now fits properly within the form component, including cases where the selected process has a long name.
+
+### Better handling for restricted child forms
+
+When a public form triggers a child form that is not publicly accessible, users now receive a clearer message instead of being redirected unexpectedly.
+
+### Clearer unauthorized submission message
+
+Forms now display a more helpful message when a user is not authorized to submit.
+
+### Dynamic browser display title support
+
+The browser display title can now be set dynamically through form attributes, enabling more flexible form behavior based on runtime data.
+
+### Highlighting active form events
+
+Arrow elements in Forms now visually indicate when associated events are active, making configured interactions easier to identify.
+
+### Improved Form Builder value mapping
+
+Form Builder now supports valid structured values provided as strings for compatible controls and data types, improving value mapping behavior.
+
+### Improved side toolbar behavior
+
+The form editor side toolbar now automatically scrolls expanded sections into view, reducing the need for manual scrolling.
+
+## Analytics and Graphs
+
+### Analytics disabled state improvements
+
+When analytics are disabled, users now see a clear indication instead of an empty analytics panel.
+
+### End-date selector fix
+
+The analytics end-date selector now allows selecting the current time, even when the page has remained open for several minutes.
+
+### Graph responsiveness improvements
+
+Graphs now automatically rescale when the browser zoom level changes, improving readability and layout consistency.
+
+### Local date and time display
+
+Graph date and time values now reflect the user’s local date and time.
+
+## Authentication and Workspace Invitations
+
+### Mobile SSO login fix
+
+SSO login now works correctly on mobile devices for supported providers.
+
+### Workspace invitation session handling
+
+Accepting a workspace invitation in another browser tab no longer unexpectedly interrupts the existing active session.
+
+## UI and General Experience
+
+### Side Panel width handling
+
+Side Panels now respect width limits when multiple columns are used, preventing layout overflow and keeping the interface usable.
+
+### Dismissible system notifications
+
+System notifications can now be closed using a dedicated close button, avoiding unintended actions when dismissing them.
+
+### Keyboard shortcut for saving processes
+
+A keyboard shortcut is now available for saving processes, helping users work faster in the process editor.
+
+## Summary
+
+This release improves the overall user experience across form building, runtime interactions, analytics visualization, authentication, and editor workflows. It includes fixes for UI inconsistencies, clearer user-facing messages, better mobile login behavior, and productivity enhancements for process editing.

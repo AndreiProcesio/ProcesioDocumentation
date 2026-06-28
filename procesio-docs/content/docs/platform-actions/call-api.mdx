@@ -1,0 +1,73 @@
+---
+title: "Call API"
+description: "The Call API action enables you to perform REST/HTTP requests to a specified web API to query data from apps and services. You can retrieve, add,…"
+---
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vV3gPQkcE5o" title="Embedded video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+
+The Call API action enables you to perform REST/HTTP requests to a specified web API to query data from apps and services. You can retrieve, add, delete and update data. 
+
+**PROCESIO** integrates the Call API action with your API authentication credentials defined in Credentials Manager. This means that you have to create an API credentials configuration for the web service/app you want to connect to in Credentials Manager (check Working with Credentials Manager).
+
+<Callout type="info">
+For example, if you want to connect to a JIRA REST API web service, you must once configure the authentication credentials of JIRA service in Credentials Manager and you can use this configuration in setting up Call API actions.
+</Callout>
+
+You can test the request and see the response received from the API server that helps you troubleshoot if needed.
+
+### **How to configure the Call API action?**
+
+Go to the Process Designers section and open a new or an existing process. Actions configuration can be performed once they are dragged and dropped on canvas. 
+
+**Step 1**: Drag the Call API action from Toolbar and drop it on canvas; click on the action to open the Properties Panel.
+
+![](/images/docs/W9bR6sWXBDz6Y-f0xM3nk_callapi.png)
+
+**Step 2**: You can edit the action name.
+
+**Step 3**: Select first the API credentials configuration in Properties Panel. The API  credentials configuration needs to be created upfront in Credentials Manager to be displayed in the list.  
+
+![](/images/docs/A-babeBd2c2-Y4cxi9oWs_screenshot-2023-05-19-at-112102.png)
+
+**Step 4**: Click on **Call API (not configured)** card to go to the configurations steps.
+
+**Step 5**: Call API configuration - the Request builder.
+
+![](/images/docs/Gg71M8McG9TVOGiGcxpT5_screenshot-2023-05-19-at-112345.png)
+
+1. **Verb**: in this dropdown list you will find several methods that can be used to send different types of requests.
+2. **Endpoint URL:** in this field, the URL to request is already populated with details from the API credentials configuration selected at Step 1; you need to add the Method Name and IDs to complete your request resource URL/endpoint. Any information provided in the Query Params tab will be added to the URL.
+3. **Tabs**:
+   - **Query Params**: this tab is used to specify any HTTP query parameters you may want to include with your request. A new line is added once the previous one is filled in. Query Params will be appended to the end of the request URL, following "?". You will not be allowed to add query params directly in the URL. To send a path parameter, enter the parameter name into the URL field, after a colon ":".
+     - **Name**: the name of the parameter;
+     - **Value**: the value of the parameter (can be a process variable, or text + variable);
+   - **Headers**: this tab is used to specify any optional HTTP request headers you may want to include with your request. A new line is added once the previous one is filled in. 
+     - **Name**: the name of the header;
+     - **Value**: the value of the header (can be a process variable, or text + variable);
+   - **Body**: allows you to specify the data you need to send with the request; the editor supports the JSON format.
+
+<Callout type="info">
+For Query Parameters and Headers use "Activate for multi-line editing" icon or simply press "Esc".  This will expand the area for typing and editing a larger value for your keys to a full screen editor.
+</Callout>
+
+![](/images/docs/ewYLdeVh_MkN5dUEiWbhf_expand-area-to-full-editor.gif)
+
+<Callout type="info">
+The request can contain process variables in Query Params, Headers, and Body.  To open the variables selector and start using process variables, press the Insert key (for Windows) or Shift+Tab (for Mac). All process variables used in the Call API configuration will be displayed by default in Test Action > Test Values section. 
+
+
+
+Depending on the Authorization type defined in the selected API credentials configuration, the API key, and their values may be added in Headers or Query Params tabs to be passed along with the request. 
+</Callout>
+
+&#x20;    4\. **Output Variables**
+
+In order to make use of the data that will be received in the Response further in the process flow, you need to map the outputs to process variables. There are 3 types of possible output that you can map:
+
+- Status Output: stores the status code received from the HTTP request, as an **Integer**.
+- Body Output: stores the HTTP request response body as a **String** or **JSON**.
+- File Output: if the response contains a file, it is stored as a **File**.
+
+**5. Time out**
+
+You can specify how long to wait for an API call to complete before a timeout occurs. The minimum setting is 60 seconds, and the maximum is 3600.

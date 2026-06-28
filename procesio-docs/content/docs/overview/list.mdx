@@ -1,0 +1,50 @@
+---
+title: "List"
+description: "The List element is a powerful repeating container that allows users to add, edit, and remove multiple structured items within a single form. Each…"
+---
+
+The List element is a powerful repeating container that allows users to add, edit, and remove multiple structured items within a single form. Each list item shares the same field structure (defined by child elements), making it perfect for collecting variable-length datasets — like line items, team members, contact entries, or any repeating data group.
+
+The List is highly configurable: you can set minimum and maximum item counts, control whether users can add or remove rows (canadd / canremove), and customize the add-button label. Data can come from a static definition, JSON, or a live URL endpoint — and the full array of item values is accessible at runtime via value, ready to flow directly into process variables.
+
+The special $item and $fields event context variables give you access to the currently active item and its fields when responding to per-row events, enabling row-level logic like validating a specific entry or triggering a process for an individual line item.
+
+## Key Use Cases
+
+•        Purchase order line items — product, quantity, unit price, total per row
+
+•        Team member entry — name, role, email for each person on a project
+
+•        Dynamic checklists — user adds tasks, marks them complete, removes irrelevant ones
+
+•        Pre-populating a list from a process variable (JSON array) on form load
+
+•        Enforcing a minimum of 1 and maximum of 10 items using min and max
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — including $item and $fields context variables available within per-row events.*
+
+
+
+| **API Name**          | **Description**                                             | **Type**     | **Default** | **Notes**              |
+| --------------------- | ----------------------------------------------------------- | ------------ | ----------- | ---------------------- |
+| **label**             | Display label for the list                                  | string       | —           | —                      |
+| **tooltip**           | Help text shown alongside the label                         | string       | —           | —                      |
+| **readonly**          | If true, existing items cannot be edited                    | boolean      | false       | —                      |
+| **visible**           | Controls element visibility                                 | boolean      | true        | —                      |
+| **value**             | The full array of list item values — read or set at runtime | any\[]       | \[]         | —                      |
+| **sourcetype**        | How initial data is loaded                                  | string       | —           | json, url              |
+| **sourcevalue**       | The data source value for pre-populating items              | string\|any  | —           | —                      |
+| **addmultiplefields** | Allows adding multiple field groups per item                | boolean      | —           | —                      |
+| **min**               | Minimum number of items required                            | number\|null | —           | —                      |
+| **max**               | Maximum number of items allowed                             | number\|null | —           | —                      |
+| **canadd**            | Whether the user can add new items                          | boolean      | —           | —                      |
+| **canremove**         | Whether the user can remove items                           | boolean      | —           | —                      |
+| **addbuttontext**     | Custom label for the add item button                        | string       | —           | —                      |
+| **$item**             | Current item object — available in per-row events           | any          | —           | Event context variable |
+| **$fields**           | Current item's fields object — available in per-row events  | any          | —           | Event context variable |
+| **name**              | Unique element name                                         | string       | —           | —                      |
+| **id**                | Unique element ID                                           | string       | —           | —                      |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

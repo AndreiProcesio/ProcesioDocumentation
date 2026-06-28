@@ -1,0 +1,221 @@
+---
+title: "Duplicate identification"
+description: "Duplicate identification&x20;&x77;ill allow you to automate the way you work with lists that contain duplicates. In the following you will see an…"
+---
+
+**Duplicate identification&#x20;**&#x77;ill allow you to automate the way you work with lists that contain duplicates. In the following you will see an example in the form of a scenario.
+
+### Video presentation
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lmcVuM6rD5c" title="Embedded video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+
+### **Scenario**
+
+As a PROCESIO user, I want to have an action that identifies duplicates in a List (the list must contain data models). The action will help me obtain a new list containing only the unique values.
+
+### **How to**
+
+The example requires a process with just the **Duplicate identification** action with the following configuration.
+
+**&#x20;   Step 1.   &#x20;**[Create a new process](https://docs.procesio.com/creating-a-basic-process) and give it a name.
+
+&#x20;**&#x20;  Step 2.   &#x20;**&#x44;rag the **Duplicate identification** action to the canvas and link it to the other actions.
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+**&#x20;  Step 3.   &#x20;**&#x57;e will use in our example the **employeelist** [data model](https://docs.procesio.com/working-with-data-models).
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+**&#x20;  Step 4.   &#x20;**[Add the needed variables](https://docs.procesio.com/working-with-process-variables).
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+<Callout type="info">
+We will use the data type created in the previous step to create the input variable &lt;%input_list%&gt; and the output variables &lt;%duplicates%&gt; and &lt;%unique%&gt;.  The &lt;%correlation%&gt; output variable will use the preconfigured **correlation** data type that you can find in the Type dropdown.&#x20;
+
+*(Screenshot unavailable — image was removed from the original source.)*
+</Callout>
+
+**&#x20;  Step 5.   &#x20;**&#x43;lick the **Duplicate list** action to access its configurations and click the button **Configure**.
+
+- add the variables like in the following screenshot
+- we used the following **JSon configuration&#x20;**&#x66;or our example. You can change it to better suit your needs:
+
+```json
+{
+	"IdField": "id",
+	"FieldMatches": [
+		{
+			"FieldName": "name",
+			"MatchType": "Exact"
+		},
+		{
+			"FieldName": "email",
+			"MatchType": "exact"
+		},
+		{
+			"FieldName": "department",
+			"MatchType": "exact"
+		}
+	]
+}
+```
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+&#x20;
+
+**Full/Complex JSon configuration explanation:**
+
+```json
+{
+	"IdField":"id",
+	"FieldMatches":[
+		{
+			"FieldName":"Field1",
+			"MatchType":"Exact",
+			"IgnoredTerms":["ltd","usa"]
+		},
+		{
+			"FieldName":"Field2",
+			"MatchType":"Similar",
+			"IgnoredTerms":["ltd","usa"]
+		},
+		{
+			"FieldName":"Field3",
+			"MatchType":"Fuzzy",
+			"IgnoredTerms":["ltd","usa"],
+			"FuzzyAlgorithm":"Levenstein",
+			"FuzzyThreshold":0.7
+		},
+		{
+			"FieldName":"Field4",
+			"MatchType":"Contains",
+			"IgnoredTerms":["ltd","usa"]
+		},
+		{
+			"FieldName":"Field5",
+			"MatchType":"Soundex",
+			"IgnoredTerms":["ltd","usa"],
+			"SoundexDistance":4
+		},
+		{
+			"FieldName":"Field6",
+			"MatchType":"SimilarWordMatch",
+			"IgnoredTerms":["ltd","usa"],
+			"SimilarFirstNwords":1,
+			"SimilarLastNwords":1
+		}
+	],
+	"GeneralIgnoredTerms":["ltd","usa"],
+	"AlternateFields":[
+		{
+			"FieldName":"Field1",
+			"FieldAlternateNames":["Field2","Field3"]
+		},
+		{
+			"FieldName":"Field3",
+			"FieldAlternateNames":["Field4","Field1","Field2"]
+		}
+	],
+	"Sort":[
+		{"Field":"Field1","OrderType":"Asc"},
+		{"Field":"Field2","OrderType":"Desc"}
+	]
+}
+```
+
+- **FieldName&#x20;**- is the attribute in the data model (the header in the excel).
+- **IdField** and **FieldMatches** - are used because the **Duplicate** action works with complex lists ( lists of type "data model" ).
+- **MatchType&#x20;**- pattern matching is made by using several algorithms, the values accepted (you can use several in a combined manner) are:
+  - **Exact** - an exact match needs to be validated (=). The Exact match type uses all configurations.
+  - **Similar&#x20;**- it compares 2 elements to see if:
+    - special characters do not exist, E.g. John-Doe and John Doe are a match (before comparing, it replaces special characters and space characters with string.empty).
+    - phone numbers E.g. 376-323-1111 and 323-1111 are a match (if after replacing special characters and spaces with string.empty the string contains only numbers, a Field1 contains Field2 OR Field2 contains Field1 assessment is made).
+    - regardless of whether WWW, HTTP(s)://,  exists to enhance domain or URL comparison.
+    - an email is written with @ or " at " or "\[at]" (should be a match).
+  - **Fuzzy&#x20;**- this uses the algorithms available in StringSimilarity Action to compare one string against the other (read this for more details: [Actions | String similarity](https://docs.procesio.com/string-similarity) ).
+  - **Contains&#x20;**- this checks if Field1 contains Field2 OR Field2 contains Field1.
+  - **Soundex -&#x20;**&#x74;his checks if 2 words are similar if you would speak them. See [implementation example](https://www.techrepublic.com/blog/software-engineer/how-do-i-implement-the-soundex-function-in-c). This matching algorithm evaluates the distance in “sounding” on a scale from 0 to 4, where 4 means the most similar “sounding” and 0 means that the words are very different.
+  - **SimilarWordMatch&#x20;**- This checks if the first N words in a string are the same as the first N words in another string OR if the last N words in a string are the same as the last N words in another string.
+- **IgnoredTerms** is a optional setting that is used to replace the words in this property with string.empty before making the Match assessment.
+- **FuzzyAlgorithm** and  **FuzzyThresholdproperties** are only used when **MatchType = Fuzzy**. If MatchType is something else, those properties will be ignored so, they can be null or can even not be present.
+- **SimilarFirstNwords** and **SimilarLastNwords&#x20;**&#x70;roperties are only used when **MatchType = SimilarWordMatch**, in which case at least one should be >0. If both are =0 then the SimilarWordMatch will not be executed at all since it does not make sense. If MatchType is something else, those properties will be ignored, so, they can have any value or can even not be present.
+- **SoundexDistance&#x20;**- This is used only when the **MatchType = Soundex** and it can be set 0, 1, 2, 3 or 4, where 4 means that the words are very similar when spoken.
+- The **GeneralIgnoredTerms&#x20;**&#x70;roperty should be used to add ignored terms for all Matches. If you set something in this property, it is as if you have settled the same value for **IgnoredTerms&#x20;**&#x69;n all Matches. GeneralIgnoredTerms and IgnoredTerms can be used together, as the terms set in GeneralIgnoredTerms will be added on top of the words set in IgnoredTerms when evaluating the matches. Some examples of usage:
+
+```text
+GeneralIgnoredTerms: “ltd”, “l.t.d”, “;”, “-“ & IgnoredTerms: “ “ (space), “,“, “usa“
+```
+
+- The **AlternateFields** setting describes if the data that normally resides on a certain field might be found in another field as well. The consequence of setting alternate fields for a particular field is that when evaluating a match for a certain field, the same match assessment will be executed for the alternate fields as well and the result of all those alternate matches will be evaluated with OR to determine the result of the overall match. For example, when executing the match for Field1 in the JSON example above ("MatchType":"Exact"), because for Fields1 we have alternate fields ("FieldAlternateNames":\["Field2","Field3"]) the same match will be executed for Fields: Fields2 & Fields3 and, to determine if we have a field match for a certain Match setting, the following operation will be executed (pseudo-code):&#x20;
+
+```text
+FieldMatch is true if:
+Field1.Match.IsTrue OR Field2.Match.IsTrue OR Field3.Match.IsTrue
+```
+
+<Callout type="warn">
+**IMPORTANT:&#x20;**&#x49;f Fields1 has the alternate fields Field2 & Field3 **does not mean** that Field2/Field3 has Field1 as an alternate field.
+</Callout>
+
+- **Sort&#x20;**&#x69;s a optional setting that describes that after evaluating the matches, the output list should be sorted based on the cumulative rules described here. If no setting is present here, no sorting operation will be performed.
+
+<Callout type="warn">
+**IMPORTANT**
+
+- The matching algorithms work only on Fields that are of type primitive and not on data structures (if the config gives a field that is another JObject/JArray, the Action was not tested in this conditions)
+- a Row Match is TRUE only if all matches are TRUE, so the evaluation looks like this (pseudo-code for the JSON config from above):&#x20;
+</Callout>
+
+```text
+RowMatch is true if:
+(Field1.Match.IsTrue OR Field2.AlternateField.Match.IsTrue OR Field3.AlternateField.Match.IsTrue)
+AND Field2.Match.IsTrue 
+AND (Field3.Match.IsTrue OR Field4.AlternateField.Match.IsTrue OR Field1.AlternateField.Match.IsTrue OR Field2.AlternateField.Match.IsTrue) 
+AND Field4.Match.IsTrue 
+AND Field5.Match.IsTrue 
+AND Field6.Match.IsTrue
+```
+
+**&#x20;  Step 6.    Save** and **Validate&#x20;**&#x74;he process.
+
+**&#x20;  Step 7.   &#x20;**&#x45;ach time you will run the process you are expected to add the list you wish to check, for this example we used:
+
+```json
+[{
+  "id": 1,
+  "name": "Nerti Eccles",
+  "department": "Legal",
+  "email": "neccles0@wordpress.com"
+}, {
+  "id": 2,
+  "name": "Giacinta McGriele",
+  "department": "Training",
+  "email": "gmcgriele1@fc2.com"
+}, {
+  "id": 3,
+  "name": "Leia Winnett",
+  "department": "Support",
+  "email": "lwinnett2@lycos.com"
+}, {
+  "id": 4,
+  "name": "Leia Winnett",
+  "department": "Support",
+  "email": "lwinnett2@lycos.com"
+}, {
+  "id": 5,
+  "name": "Blair Streak",
+  "department": "Research and Development",
+  "email": "bstreak4@yellowpages.com"
+}]
+```
+
+**&#x20;  Step 8.   &#x20;**&#x43;lick **Run&#x20;**&#x61;nd add the list.
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+&#x20;**&#x20;  Step 9.   &#x20;**&#x43;lick **Check instance** to see the results in the output section.
+
+*(Screenshot unavailable — image was removed from the original source.)*

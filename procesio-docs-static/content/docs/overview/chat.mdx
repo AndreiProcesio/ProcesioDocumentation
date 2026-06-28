@@ -1,0 +1,252 @@
+---
+title: "Chat"
+description: "The Chat component in PROCESIO Forms is a headless chat engine."
+---
+
+# 💬 Chat Component (Headless)
+
+## Overview
+
+The **Chat** component in PROCESIO Forms is a **headless chat engine**.
+
+> ⚡ Headless means the Chat shows messages and captures input — but the logic is fully controlled by you.
+
+The Chat:
+
+- Displays messages&#x20;
+- Triggers events&#x20;
+- Waits for your Process / Form / JavaScript to respond&#x20;
+
+It does **not** automatically generate answers.
+
+# 🧠 How It Works
+
+**Simple Flow**
+
+1. User sends a message&#x20;
+2. Chat triggers an event&#x20;
+3. You handle the event (usually with a Process)&#x20;
+4. The Process decides what to do&#x20;
+5. A response is sent back to the Chat&#x20;
+6. The user sees the answer&#x20;
+
+> 💡 Think of the Chat as the interface.
+> &#x20;Your Process is the brain.
+
+# 🎯 Chat Events
+
+The Chat component provides 3 control events:
+
+## 🔹 onReady
+
+Triggered when the Chat loads.
+
+Use it to:
+
+- Send a welcome message&#x20;
+- Load previous conversation&#x20;
+- Initialize session variables&#x20;
+
+## 🔹 onMessageFetch
+
+Triggered when messages are loaded.
+
+Use it to:
+
+- Sync chat history&#x20;
+- Modify messages before display&#x20;
+- Load data from a database&#x20;
+
+## 🔹 onMessageSent (Main Event)
+
+Triggered when a user sends a message.
+
+This is where most logic happens.
+
+Common uses:
+
+- Trigger a Process&#x20;
+- Analyze user input&#x20;
+- Route logic&#x20;
+- Send a response&#x20;
+
+> ✅ In most cases, you will use **onMessageSent**.
+
+# 🔌 How to Connect Chat to Logic
+
+You can map Chat events to:
+
+## ✅ Option 1 — Process (Recommended)
+
+Best for:
+
+- Business logic&#x20;
+- API calls&#x20;
+- Integrations&#x20;
+- Conditional routing&#x20;
+- AI logic&#x20;
+
+**Example Flow**
+
+User sends message
+&#x20;→ onMessageSent
+&#x20;→ Process starts
+&#x20;→ Process checks message
+&#x20;→ Process sends response
+
+## 📋 Option 2 — Another Form
+
+Use this when:
+
+- You want to open a form based on chat input&#x20;
+- You want structured data collection&#x20;
+
+**Example**
+
+User types:
+&#x20;Create request
+
+→ Open Request Form
+
+## 💻 Option 3 — JavaScript
+
+Use JavaScript for:
+
+- UI behavior&#x20;
+- Input validation&#x20;
+- Formatting messages&#x20;
+- Controlling visibility&#x20;
+
+> ⚠️ Keep business logic inside Processes whenever possible.
+
+# 📦 Chat Data & Properties
+
+The Chat component stores messages in:
+
+**value**
+
+This contains the list of chat messages.
+
+Other useful properties:
+
+- userId — identifies the user&#x20;
+- roomId — identifies the chat session&#x20;
+- loading — shows loading state&#x20;
+- typing — typing indicator&#x20;
+- visible — show/hide chat&#x20;
+
+These can be used in:
+
+- Processes&#x20;
+- JavaScript&#x20;
+- Conditional logic&#x20;
+
+# 🔍 Using Filters in Processes
+
+Inside your Process, you typically:
+
+**Step 1 — Filter the message**
+
+Example:
+&#x20;Check if the message contains **"help"**.
+
+Filtering helps simplify your logic before making decisions.
+
+# 🔀 Using Decisionals
+
+After filtering, use **Decisionals** to route the conversation.
+
+**Example Logic**
+
+If message contains **"status"**
+&#x20;→ Call order API
+
+If message contains **"help"**
+&#x20;→ Send help instructions
+
+Else
+&#x20;→ Send default response
+
+This is how you build conversation flows.
+
+# 🏗 Typical Setup
+
+1. Add Chat to your Form&#x20;
+2. Use **onMessageSent**&#x20;
+3. Trigger a Process&#x20;
+4. Filter the latest message&#x20;
+5. Use Decisionals&#x20;
+6. Send response back&#x20;
+
+That’s all you need for a working chat flow.
+
+# 🚀 Common Use Cases
+
+## FAQ Bot
+
+Automatically answer common questions.
+
+## Command-Based Chat
+
+User types:
+
+/status 1234
+
+Process:
+
+- Extract order ID&#x20;
+- Call backend API&#x20;
+- Return result&#x20;
+
+## Guided Assistant
+
+- Ask step-by-step questions&#x20;
+- Collect answers&#x20;
+- Create a request automatically&#x20;
+
+## AI-Powered Chat
+
+- Send user message to AI&#x20;
+- Receive generated response&#x20;
+- Return it to the Chat&#x20;
+
+# ✅ Best Practices
+
+- Use **onMessageSent** for main logic&#x20;
+- Keep business logic in Processes&#x20;
+- Filter messages early&#x20;
+- Always include a fallback response&#x20;
+- Store chat history if needed&#x20;
+
+# 📌 Summary
+
+The Chat component:
+
+- Is headless&#x20;
+- Is event-driven&#x20;
+- Is fully customizable&#x20;
+- Works together with Processes&#x20;
+
+It is not a ready-made chatbot.
+
+It is a flexible conversational engine powered by your workflows.
+
+
+
+# API
+
+| Name                 | Description                                                                              | Type                                                                                                                                                                     | Default |
+| -------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| `label`              | Chat label.                                                                              | String                                                                                                                                                                   |         |
+| `currentUserId`      | Id of user is the chat. Takes internal user id if defined, generates one if not defined. | String                                                                                                                                                                   |         |
+| `areMessagesLoading` | Show loading state when no messages loaded.                                              | Boolean                                                                                                                                                                  | `false` |
+| `isTyping`           | Someones typing indicator.                                                               | Boolean                                                                                                                                                                  | `false` |
+| `roomId`             | Room (chat) ID (*readonly*).                                                             |                                                                                                                                                                          |         |
+| `value`              | Chat messages.                                                                           | Array\&lt;<br /> \&#123;<br />    \_id: String, <br />    content: String,&#xA;    senderId: String,<br />    roomId: String,&#xA;    timestamp:   String \| null<br /> &#125;<br />> | `[]`    |
+| `visible`            | If false, element is hidden.                                                             | Boolean                                                                                                                                                                  | `true`  |
+| `name`               | Unique element name.                                                                     | String                                                                                                                                                                   |         |
+| `id`                 | Unique element ID.                                                                       | String                                                                                                                                                                   |         |
+
+
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

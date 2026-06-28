@@ -1,0 +1,33 @@
+---
+title: "Static Table Row"
+description: "The Static Table Row element represents a single, fixed-structure row within a form-based table layout. Unlike the Dynamic Table Row (which renders a…"
+---
+
+The Static Table Row element represents a single, fixed-structure row within a form-based table layout. Unlike the Dynamic Table Row (which renders a repeating set of rows from a data array), the Static Table Row represents exactly one row whose column structure is defined at design time and whose value can be set or read at runtime.
+
+It is best used when you need to display or capture a predictable, one-off row of data — such as a summary row, a totals row, or a specific named record — within a table-like layout. The value attribute holds the row's current data object and is fully accessible and writable from the Procesio Forms data model at any event.
+
+## Key Use Cases
+
+•        A totals or summary row at the bottom of a financial table
+
+•        Displaying a specific reference record (e.g., the original request) alongside a review form
+
+•        A header-information row that can be pre-filled from a process variable on load
+
+•        A single configurable row whose visibility can be toggled based on conditions
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms.*
+
+
+
+| **API Name** | **Description**                               | **Type**  | **Default** | **Notes** |
+| ------------ | --------------------------------------------- | --------- | ----------- | --------- |
+| **visible**  | Controls row visibility                       | boolean   | true        | —         |
+| **value**    | The row's data value — read or set at runtime | any\|null | null        | —         |
+| **name**     | Unique element name                           | string    | —           | —         |
+| **id**       | Unique element ID                             | string    | —           | —         |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

@@ -1,0 +1,130 @@
+---
+title: "Date-time Input"
+description: "The DateTime control lets you capture or display date and/or time values in your forms with flexible configuration options. It supports multiple…"
+---
+
+# 📅 **DateTime Control — PROCESIO Forms**
+
+The **DateTime control** lets you capture or display date and/or time values in your forms with flexible configuration options. It supports multiple **modes**, customizable **intervals**, range restrictions, and event triggers.
+
+## 🌟 **Features & Modes**
+
+🔹 **Modes**
+
+Choose how the control behaves:
+
+| Mode                  | Description                     |
+| --------------------- | ------------------------------- |
+| dateTime              | User selects both date and time |
+| date                  | Only date selection             |
+| time                  | Only time selection             |
+| 📌 Default: dateTime  |                                 |
+
+🔹 **Inline View Mode**
+
+- When enabled (inline: true), the control renders directly in the form instead of using a popup calendar/time picker.&#x20;
+- Ideal for always-visible date/time selection controls.&#x20;
+
+## 📏 **Range Limits**
+
+🔹 **Min & Max**
+
+Define the valid selection boundaries:
+
+| Property | Purpose                    |
+| -------- | -------------------------- |
+| minDate  | Earliest date/time allowed |
+| maxDate  | Latest date/time allowed   |
+
+These prevent users from picking values outside the desired range.&#x20;
+
+## 🚫 **Disable & Enable Specific Ranges**
+
+🔹 **Disabled Intervals**
+
+- Use disabledDates to block specific dates or intervals.&#x20;
+- These values are lower priority than availableDates.&#x20;
+
+🔹 **Available Intervals**
+
+- Use availableDates to explicitly define allowed intervals.&#x20;
+- Takes precedence over disabled sets — only these ranges are selectable if defined.&#x20;
+
+## ⏱ **Time Intervals**
+
+Configure the **minute step** for time selection:
+
+| Property       | Purpose                                                          |
+| -------------- | ---------------------------------------------------------------- |
+| minuteInterval | Step in minutes between selectable times (only in time/dateTime) |
+
+Example: Setting this to 15 allows only 15-minute increments.&#x20;
+
+## 🧠 **Other Useful Options**
+
+| Property                | Function                           |
+| ----------------------- | ---------------------------------- |
+| disabled                | Make control non-interactive       |
+| readonly                | User can view but not edit         |
+| visible                 | Show/hide the control              |
+| clearable               | Allow clearing the value           |
+| hasNow                  | Offers a quick “Now/Today” button  |
+| showDisabledTimeOptions | Show disabled time options in list |
+| required                | Mark field as mandatory            |
+
+## 🔄 **Events & Mapping**
+
+- You can map control events (e.g., value change) to **Trigger Process** or **Trigger JavaScript** actions enabling automation workflows when users interact with the control.&#x20;
+
+Examples include:
+
+- Triggering a process when the date changes.&#x20;
+- Running custom JavaScript based on user input.&#x20;
+
+## 🧪 **Typical Usage Scenarios**
+
+✔ Collect birth date only
+
+- Set mode: "date"&#x20;
+
+✔ Schedule a meeting
+
+- Use mode: "dateTime"&#x20;
+- Define minuteInterval: 15 for common time slots&#x20;
+- Restrict with minDate and maxDate&#x20;
+
+✔ Time-only slot booking
+
+- Set mode: "time"&#x20;
+- Use availableDates to limit available hours
+
+# API
+
+| Name                      | Description                                                                               | Type                                                                                                                                                   | Values                                      | Default    |
+| ------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- | ---------- |
+| `label`                   | Display label.                                                                            | String                                                                                                                                                 |                                             |            |
+| `mode`                    | Input mode.                                                                               | String                                                                                                                                                 | `dateTime`,<br />`date`, `time`<br /><br /> | `dateTime` |
+| `inline`                  | Inline view.                                                                              | Boolean                                                                                                                                                |                                             | `false`    |
+| `placeholder`             | Hint text.                                                                                | String                                                                                                                                                 |                                             |            |
+| `tooltip`                 | Help text (displayed with label).                                                         | String                                                                                                                                                 |                                             |            |
+| `infoText`                | Additional info displayed under input.                                                    | String                                                                                                                                                 |                                             |            |
+| `defaultValue`            | Initial value.                                                                            | Date \| String \| null                                                                                                                                 |                                             |            |
+| `minDate`                 | Minimal value.                                                                            | Date \| String \| null                                                                                                                                 |                                             |            |
+| `maxDate`                 | Maximal value.                                                                            | Date \| String \| null                                                                                                                                 |                                             |            |
+| `disabledDates`           | Disabled date-time intervals. This value has lower priority compared to `availableDates`. | Array\&lt;<br /> String \| Date \| <br /> \&#123;<br />  start: Date \|<br />    String \| null;  <br />  end: Date \| String \|<br />    null;<br />  &#125;&#xA;> |                                             | `[]`       |
+| `availableDates`          | Available date-time intervals. This value has priority over `disabledDates`.              | Array\&lt;<br /> String \| Date \| <br /> \&#123;<br />  start: Date \|<br />    String \| null;  <br />  end: Date \| String \|<br />    null;<br />  &#125;&#xA;> |                                             | `[]`       |
+| `minuteInterval`          | Minute interval. Applicable to `dateTime` and `time` modes.                               | Number                                                                                                                                                 |                                             | `1`        |
+| `value`                   | Current value.                                                                            | Date \| String \| null                                                                                                                                 |                                             |            |
+| `readonly`                | If true, input is readonly.                                                               | Boolean                                                                                                                                                |                                             | `false`    |
+| `disabled`                | If true, input is disabled.                                                               | Boolean                                                                                                                                                |                                             | `false`    |
+| `visible`                 | If false, element is hidden.                                                              | Boolean                                                                                                                                                |                                             | `true`     |
+| `clearable`               | If true, can clear value.                                                                 | Boolean                                                                                                                                                |                                             | `false`    |
+| `hasNow`                  | Quick “Today/Now” option.                                                                 | Boolean                                                                                                                                                |                                             | `true`     |
+| `showDisabledTimeOptions` | Show disabled time options. Applicable to `dateTime` and `time` modes.                    | Boolean                                                                                                                                                |                                             | `false`    |
+| `name`                    | Unique element name.                                                                      | String                                                                                                                                                 |                                             |            |
+| `id`                      | Unique element ID.                                                                        | String                                                                                                                                                 |                                             |            |
+| `required`                | If true, input is mandatory.                                                              | Boolean                                                                                                                                                |                                             | `false`    |
+
+
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

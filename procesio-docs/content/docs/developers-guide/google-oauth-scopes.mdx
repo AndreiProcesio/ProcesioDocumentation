@@ -1,0 +1,63 @@
+---
+title: "Google OAuth Scopes"
+description: "1. https://www.googleapis.com/auth/calendar and https://www.googleapis.com/auth/calendar.events:"
+---
+
+# Sensitive scopes
+
+1\. https\://www\.googleapis.com/auth/calendar and https\://www\.googleapis.com/auth/calendar.events:
+
+These scopes are required to enable users to interact with the Google Calendar API. PROCESIO might have functionalities that allow users to create, modify, or retrieve calendar events on behalf of the user. The broad scope is necessary to provide comprehensive calendar management capabilities within PROCESIO's platform. The user will be able to set (add or remove) the scope as per his/her needs.
+
+2\. https\://www\.googleapis.com/auth/docs and https\://www\.googleapis.com/auth/drive.photos.readonly:
+
+These scopes are necessary for users to access Google Docs and Google Drive Photos respectively. PROCESIO might provide features that involve reading, creating, or modifying documents, as well as accessing photos stored in Google Drive. The combination of these scopes allows PROCESIO to offer a complete document management and photo integration experience to its users The user will be able to set (add or remove) the scope as per his/her needs.
+
+3\. https\://www\.googleapis.com/auth/forms.body, https\://www\.googleapis.com/auth/forms.body.readonly, and https\://www\.googleapis.com/auth/forms.responses.readonly:
+
+These scopes are utilized to enable PROCESIO users to interact with Google Forms. PROCESIO may provide functionalities to create, manage, and retrieve form bodies, as well as read form responses. By using these scopes, users can seamlessly integrate Google Forms into their PROCESIO workflows or applications. The user will be able to set (add or remove) the scope as per his/her needs.
+
+4\. https\://www\.googleapis.com/auth/spreadsheets and https\://www\.googleapis.com/auth/spreadsheets.readonly:
+
+These scopes are essential for users to work with Google Sheets. PROCESIO might offer features to create, update, or read spreadsheet data, and the requested scopes allow users to perform these operations efficiently. The combination of read and write access ensures users can utilize Google Sheets effectively within PROCESIO's platform. The user will be able to set (add or remove) the scope as per his/her needs.
+
+### Why more limited scopes aren't sufficient:
+
+PROCESIO is an automation platform allowing the user to select the scope he/ she needs in order to limit access to resources as per use case needs.&#x20;
+
+PROCESIO requires these specific scopes due to its diverse set of features and functionalities. Limiting the scopes could restrict users from accessing certain essential capabilities, hindering their ability to fully leverage PROCESIO's platform.
+
+For example, if the scopes were limited to read-only access for calendars, documents, forms, or spreadsheets, users would be unable to perform actions such as creating new events, modifying documents, submitting form responses, or updating spreadsheet data. These restricted scopes would significantly limit the potential use cases and functionality that PROCESIO aims to provide.
+
+By requesting the necessary scopes, PROCESIO ensures that its users have comprehensive access to Google APIs, enabling them to fully utilize the integrated services and build powerful applications and workflows within the PROCESIO platform.
+
+# Restrictive Scopes
+
+1\. https\://www\.googleapis.com/auth/drive:
+
+This scope is necessary for users to access and manage files and folders in Google Drive. PROCESIO might provide features that involve creating, updating, deleting, or organizing files within a user's Google Drive. The broad scope is required to enable comprehensive file management capabilities within the PROCESIO platform. Users will always have the option to choose the appropriate scopes as per automation requirements. The user will be able to set (add or remove) the scope as per his/her needs.
+
+2\. https\://www\.googleapis.com/auth/drive.metadata and https\://www\.googleapis.com/auth/drive.metadata.readonly:
+
+These scopes allow users to access the metadata of files and folders in Google Drive. PROCESIO might use these scopes to retrieve information about files, such as their titles, owners, creation dates, and other relevant metadata. This access is essential for PROCESIO to provide users with detailed information about the files they are working with. The user will be able to set (add or remove) the scope as per his/her needs.
+
+3\. https\://www\.googleapis.com/auth/drive.readonly:
+
+This scope provides read-only access to Google Drive, allowing users to view the content of their files without the ability to modify them. PROCESIO might utilize this scope to display file content within its platform, enabling users to preview documents, spreadsheets, presentations, and other file types stored in Google Drive. The user will be able to set (add or remove) the scope as per his/her needs.
+
+4\. https\://mail.google.com/ and https\://www\.googleapis.com/auth/gmail.modify:
+
+These scopes are necessary for users to interact with their Gmail accounts. PROCESIO might offer features that involve sending, modifying, or organizing emails on behalf of the user. The requested scopes enable PROCESIO to provide comprehensive email management capabilities within its platform. The user will be able to set (add or remove) the scope as per his/her needs.
+
+5\. https\://www\.googleapis.com/auth/gmail.compose and https\://www\.googleapis.com/auth/gmail.metadata:
+
+These scopes allow users to compose new emails and access email metadata respectively. PROCESIO might utilize these scopes to enable users to create new email drafts or retrieve information about their emails, such as subjects, senders, recipients, timestamps, and other relevant metadata. This access is crucial for PROCESIO to provide a seamless integration with Gmail for email-related workflows. The user will be able to set (add or remove) the scope as per his/her needs.
+
+### Why more limited scopes aren't sufficient:
+
+
+By requesting these scopes, PROCESIO ensures that its users have comprehensive access to Google APIs, allowing them to fully utilize the integrated services and build powerful applications and workflows within the PROCESIO platform.
+
+Limiting the scopes could restrict users from accessing certain essential capabilities. For example, if the scopes were limited to read-only access for Google Drive or Gmail, users would be unable to perform actions such as creating or modifying files, organizing folders, sending emails, or managing email drafts. These restricted scopes would significantly limit the potential use cases and functionality that PROCESIO aims to provide.
+
+By providing the necessary scopes, PROCESIO empowers its users to leverage the full potential of Google Drive and Gmail APIs, enabling them to efficiently manage their files and emails within the PROCESIO platform and build integrated solutions that enhance their productivity and workflows.

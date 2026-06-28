@@ -1,0 +1,38 @@
+---
+title: "Dynamic Assignee across forms"
+description: "The Dynamic Assignee Across Forms element enables powerful cross-form task assignment scenarios within Procesio. It allows one form to dynamically…"
+---
+
+The Dynamic Assignee Across Forms element enables powerful cross-form task assignment scenarios within Procesio. It allows one form to dynamically assign a task to a user based on data or decisions made in another linked form, creating seamless multi-form workflow chains where responsibility can be handed off intelligently between steps.
+
+Rather than hard-coding assignees at design time, this element reads the linked form instance (via instanceid) at runtime to resolve the correct assignee. This makes it ideal for approval chains, escalation paths, and any workflow where the next responsible party depends on the outcome of a previous step.
+
+## Key Use Cases
+
+•        Multi-step approval flows where the reviewer for step 2 is determined by the outcome of step 1
+
+•        Dynamically assigning a follow-up task to the user who submitted a related form
+
+•        Escalation workflows where instanceid is set programmatically based on process logic
+
+•        Linking a review form to its originating request form to carry over the original submitter
+
+•        Hiding the element until assignment logic has resolved (visible toggled at runtime)
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad, onChange, or custom triggers.*
+
+
+
+| **API Name**   | **Description**                                          | **Type**     | **Default** | **Notes**                                |
+| -------------- | -------------------------------------------------------- | ------------ | ----------- | ---------------------------------------- |
+| **label**      | Display label shown above the element                    | string       | —           | —                                        |
+| **tooltip**    | Help text shown alongside the label                      | string       | —           | —                                        |
+| **infotext**   | Supplementary info displayed below the element           | string       | —           | —                                        |
+| **visible**    | Controls element visibility                              | boolean      | true        | —                                        |
+| **name**       | Unique element name for referencing in logic             | string       | —           | —                                        |
+| **id**         | Unique element ID                                        | string       | —           | —                                        |
+| **instanceid** | The linked form instance ID used to resolve the assignee | string\|null | —           | Set programmatically from process output |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

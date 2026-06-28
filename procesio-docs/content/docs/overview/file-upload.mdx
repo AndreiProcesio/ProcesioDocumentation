@@ -1,0 +1,45 @@
+---
+title: "File Upload"
+description: "The File Upload element enables users to attach one or more files directly within a form. It is deeply integrated with Procesio's file handling…"
+---
+
+The File Upload element enables users to attach one or more files directly within a form. It is deeply integrated with Procesio's file handling capabilities, meaning uploaded files flow naturally into process variables and can be processed, stored, or forwarded by downstream actions in the workflow.
+
+You have full control over what users can upload: specify allowed file extensions (allowedfiletypes), enforce a maximum file size (maxfilesize), and optionally allow multiple files in a single upload field (allowmultiplefilesupload). The current file or files are accessible at runtime via the value attribute, enabling you to inspect, validate, or respond to uploads from event-driven logic.
+
+## Key Use Cases
+
+•        Document upload for onboarding, contracts, or compliance forms
+
+•        Restricting uploads to specific types (e.g., PDF only, or images: jpg, png)
+
+•        Enforcing file size limits to prevent oversized uploads at the form level
+
+•        Collecting multiple supporting documents in a single upload field
+
+•        Reading the uploaded file reference at runtime to pass it to a process action
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad, onChange, or custom triggers.*
+
+
+
+| **API Name**                 | **Description**                                  | **Type**            | **Default** | **Notes**            |
+| ---------------------------- | ------------------------------------------------ | ------------------- | ----------- | -------------------- |
+| **label**                    | Display label for the upload field               | string              | —           | —                    |
+| **tooltip**                  | Help text shown alongside the label              | string              | —           | —                    |
+| **description**              | Descriptive text displayed near the upload area  | string              | —           | —                    |
+| **infotext**                 | Supplementary info displayed below the element   | string              | —           | —                    |
+| **value**                    | Current uploaded file(s) — accessible at runtime | file\|file\[]\|null | —           | —                    |
+| **readonly**                 | View-only — user cannot upload new files         | boolean             | false       | —                    |
+| **disabled**                 | Fully non-interactive                            | boolean             | false       | —                    |
+| **visible**                  | Controls element visibility                      | boolean             | true        | —                    |
+| **allowmultiplefilesupload** | Allows uploading more than one file              | boolean             | false       | —                    |
+| **name**                     | Unique element name                              | string              | —           | —                    |
+| **id**                       | Unique element ID                                | string              | —           | —                    |
+| **required**                 | A file must be uploaded to submit the form       | boolean             | false       | —                    |
+| **maxfilesize**              | Maximum allowed file size                        | number\|null        | 500 MB      | —                    |
+| **allowedfiletypes**         | List of permitted file extensions                | string\[]           | all         | e.g. \['pdf','docx'] |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

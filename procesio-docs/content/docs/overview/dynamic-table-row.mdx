@@ -1,0 +1,50 @@
+---
+title: "Dynamic Table Row"
+description: "The Dynamic Table Row element is the most powerful tabular component in Procesio Forms. It renders a fully interactive, editable table where users…"
+---
+
+The Dynamic Table Row element is the most powerful tabular component in Procesio Forms. It renders a fully interactive, editable table where users can add, edit, and remove rows — each row sharing the same column structure defined at design time. It combines the visual structure of a data grid with the interactivity of a repeating input list.
+
+Column definitions can come from a static list, a JSON object, or a live URL. Row data is pre-populatable via sourcetype / sourcevalue, and the full row array is always accessible via value. The element exposes three special event context variables — $item, $fields, and $cellvalue — giving you deep access to the currently active row and even the specific cell being interacted with, enabling fine-grained per-row and per-cell event logic.
+
+Control over add and remove permissions (canadd / canremove), customizable button labels, empty-state messaging, and optional row numbering make this element fully production-ready for complex, data-entry-heavy form workflows.
+
+## Key Use Cases
+
+•        Editable line-item tables for purchase orders, invoices, or expense reports
+
+•        Dynamic task lists where users add, modify, and remove tasks within a process form
+
+•        Pre-populating rows from a process API call and allowing the user to modify them
+
+•        Per-row event logic — triggering a calculation or lookup when a specific cell changes ($cellvalue)
+
+•        Restricting add/remove to read-only for certain user roles via canadd / canremove at runtime
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below — including $item, $fields, and $cellvalue context variables — are accessible via the element's data model in Procesio Forms at any available event.*
+
+
+
+| **API Name**                     | **Description**                                          | **Type**    | **Default** | **Notes**              |
+| -------------------------------- | -------------------------------------------------------- | ----------- | ----------- | ---------------------- |
+| **visible**                      | Controls element visibility                              | boolean     | true        | —                      |
+| **value**                        | The full array of row data — read or set at runtime      | any\[]      | \[]         | —                      |
+| **columnsdefinitionsourcetype**  | How column definitions are provided                      | string      | —           | static list, json, url |
+| **columnsdefinitionsourcevalue** | The column definition data                               | string\|any | —           | —                      |
+| **sourcetype**                   | How initial row data is loaded                           | string      | —           | json, url              |
+| **sourcevalue**                  | The data source for pre-populating rows                  | string\|any | —           | —                      |
+| **canadd**                       | Whether the user can add new rows                        | boolean     | —           | —                      |
+| **canremove**                    | Whether the user can remove rows                         | boolean     | —           | —                      |
+| **addbuttontext**                | Custom label for the add row button                      | string      | —           | —                      |
+| **emptyrowtext**                 | Text shown when a row has no content                     | string      | —           | —                      |
+| **showheader**                   | Show or hide column headers                              | boolean     | —           | —                      |
+| **addvisualrownumber**           | Prepend a row number column                              | boolean     | —           | —                      |
+| **$item**                        | The current row object — available in row-level events   | any         | —           | Event context variable |
+| **$fields**                      | The current row's fields — available in row-level events | any         | —           | Event context variable |
+| **$cellvalue**                   | The current cell value — available in cell-level events  | any         | —           | Event context variable |
+| **name**                         | Unique element name                                      | string      | —           | —                      |
+| **id**                           | Unique element ID                                        | string      | —           | —                      |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

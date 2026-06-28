@@ -1,0 +1,57 @@
+---
+title: "Map Process Data"
+description: "Use Map Process Data action to assign (map) value to a process variable."
+---
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4wc8OqcxpTM" title="Embedded video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+
+Use Map Process Data action to assign (map) value to a process variable.
+
+A process variable is a placeholder for data that can be accessed throughout the lifecycle of a process. It is how data is transferred between actions in a process. 
+
+Process variables can receive values:
+
+1. When defining a process variable, in Default value (see Working with process variables article).
+2. When manually kicking off a process, for process variables marked as input (see Running a process flow article).
+3. When scheduling a process, for process variables marked as input (see Scheduling a process article).
+4. Within the process, using Map Process Data action.
+
+You can use Map Process Data to either give values to your process variable or to change the value of the process variable.
+
+A process variable can be mapped to:
+
+- a constant value
+- a dynamic value (coming from another process variable)
+
+**How to configure the Map process data action?**
+
+Go to the Process Designers section and open a new or an existing process. Actions configuration can be performed once they are dragged and dropped on canvas.
+
+![](/images/docs/IVDS9Vm79tXxUyU_ahzfr_map.png)
+
+**Step 1**: Drag the Map Process Data action from Toolbar and drop it on canvas; click on the action to open the Properties Panel.
+
+**Step 2**: You can edit the Action Name.
+
+**Step 3**: Click on Map Process Data (not configured) card to go to the configurations steps.
+
+![](/images/docs/bDwsauyQzWuFW_G9qyhRL_mapprocssdata.png)
+
+**Step 4:&#xA0;**&#x4D;ap process data configuration
+
+![](/images/docs/bZlS_6f0bySNvTuN5PoXF_mapprocessdata.png)
+
+- you can assign to a process variable a constant value or a dynamic value (coming from another process variable). When the action is executed, data is assigned to your process variable.
+- press **+Add variable** and the selector will open displaying the available process variables 
+- on the left side, select the process variable you want to assign new value to
+- on the right side, insert new value or a process variable from which it will receive new value.
+
+![](/images/docs/PfICfQmzwUoA9BO5O9ake_screenshot-2022-06-02-at-214754.png)
+
+<Callout type="info">
+You can assign values to multiple process variables at once in Map Process Data action.
+
+
+
+Consider that data types must match when assigning values to process variables.  Exception: String is the only data type that accepts all other data types.
+</Callout>

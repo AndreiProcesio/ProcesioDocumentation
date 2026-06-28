@@ -1,0 +1,250 @@
+---
+title: "Frontend decorator"
+description: "Custom actions offer you the ability to create and control functionalities specific to your needs. An important part of your action is the ability to…"
+---
+
+Custom actions offer you the ability to create and control functionalities specific to your needs. An important part of your action is the ability to interact with it, fortunately this can be done with the aid of the visual components presented in this article.
+
+Before reading this guide we recommend you go through our [Custom action guides](https://docs.procesio.com/custom-actions) to help you create your environment.
+
+To have a better understanding of the visuals used inside your custom actions we have provided a list of simple examples on how to add them inside of your custom actions.
+
+The component used is chosen inside the frontend attribute by the Type parameter FeComponentType.
+
+<Callout type="info">
+Th&#x65;**&#xA0;Parent** parameter is used to group elements (sidepanel or modal) in a parent-child structure similar to how a div is treated in HTML. **RowId&#xA0;**&#x61;llows you to choose the display order of each component inside the custom action. The **Tab** frontend parameter can be used if you wish to display the component on a different  tab.
+</Callout>
+
+
+&#x20; 1\.    **Select&#xA0;**- allows the use of dropdowns inside your custom actions, dropdowns that will allow you to choose a value from a predefined list.
+
+![](/images/docs/PvrIvHIJKSaY7-a1_EUqV_image.png)
+
+The Options parameter points to the list used inside the dropdown.
+
+```csharp
+        [FEDecorator(Label = "First number to add", Type = FeComponentType.Select, Tab = "Input Tab", 
+Options = "ConfigP1OptionsList", Tooltip ="Tooltip input1")]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = false)]
+public int Input1 { get; set; }
+
+
+private IEnumerable<OptionModel> ConfigP1OptionsList { get; } = new List<OptionModel>()
+        {
+            new OptionModel()
+            {
+                name = "Value 1",
+                value = 1
+            },
+            new OptionModel(){
+                name = "Value 2",
+                value = 2
+            },
+            new OptionModel(){
+                name = "Value 3",
+                value = 3
+            },
+            new OptionModel(){
+                name = "Value 4",
+                value = 4
+            },
+            new OptionModel(){
+                name = "Value 5",
+                value = 5
+            }
+        };
+```
+
+For more a more in depth explanation click [here](https://docs.procesio.com/custom-actions/frontend-select-decorator-guide).
+
+&#x20; **2.&#x20;**&#x20;  **Radio -&#xA0;**&#x61;llows the use of radio buttons inside your custom actions, the radio buttons are added from a predefined list.
+
+![](/images/docs/xdkBz7STlPkbkTOKwrBlf_image.png)
+
+```csharp
+        [FEDecorator(Label = "Radio", Type = FeComponentType.Radio, Options = "ConfigP1OptionsList")]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public string Radio { get; set; }
+
+
+private IEnumerable<OptionModel> ConfigP1OptionsList { get; } = new List<OptionModel>()
+        {
+            new OptionModel()
+            {
+                name = "Value 1",
+                value = 1
+            },
+            new OptionModel(){
+                name = "Value 2",
+                value = 2
+            },
+            new OptionModel(){
+                name = "Value 3",
+                value = 3
+            },
+            new OptionModel(){
+                name = "Value 4",
+                value = 4
+            },
+            new OptionModel(){
+                name = "Value 5",
+                value = 5
+            }
+        };
+```
+
+
+
+&#x20; **3.**    **Check\_box**
+
+![](/images/docs/2NBUGwBD7jt-Qf71DHACF_image.png)
+
+```csharp
+        [FEDecorator(Label = "Approved", Type = FeComponentType.Check_box)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public String str { get; set; }
+```
+
+
+
+&#x20; **4.&#x20;**&#x20;  **Number**
+
+![](/images/docs/iHz8L-XFqyG3tqJGAaqCW_image.png)
+
+```csharp
+        [FEDecorator(Label = "Your number", Type = FeComponentType.Number)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public int num { get; set; }
+```
+
+
+
+&#x20; **5.    Modal** - This frontend decorator is intended to be used at the class level. In order to have a modal implemented you will need to use the parameter Type as follows **Type = FeComponentType.Modal** to have all your content inside the modal. The modal will appear when you click on the Configure formatting button. The Configure formatting button is used to open the modal from inside the action.
+
+![](/images/docs/GNkOlLH7lNmeuZr0LZJzc_image.png)
+
+```csharp
+    [ClassDecorator(Name = "Name of Action", Shape = ActionShape.Square, Description = "Description of the custom action", Classification = Classification.cat1, Tooltip = "Tooltip of the action", IsTestable = false, Parent = "Side_Panel_Parent")]
+    [FEDecorator(Label = "Configure formatting", Type = FeComponentType.Modal, Tab = "Presentation")]
+    public class MyAction : IAction
+```
+
+****
+
+&#x20; **6.    Side\_pannel -&#xA0;**&#x73;ide panels give you the ability to add and structure visual components on different panels. You will also need to use the **Parent** parameter to show the main container that the side panel is included in.
+
+![](/images/docs/rP5qm_kHDx4pmYqHUP0c8_image.png)
+
+```csharp
+    [FEDecorator(Label = "Side panel", Type = FeComponentType.Side_pannel, 
+            Parent = "Side_Panel_Parent")]
+    [BEDecorator(IOProperty = Direction.Input)]
+    [Validator(IsRequired = false)]
+    public String str { get; set; }
+```
+
+
+
+&#x20; **7.   Text** - allows users to add strings and numbers that can be used inside your flow.
+
+![](/images/docs/QMhlPOWFd8V4pOBhpwk2A_image.png)
+
+```csharp
+        [FEDecorator(Label = "Second number to add", Type = FeComponentType.Number, Tab = "Input Tab",
+        DefaultValue = 0)]
+        [BEDecorator(IOProperty = Direction.Input)]
+                [Validator(IsRequired = false)]
+        public String str { get; set; }
+```
+
+
+
+**&#x20; 8.   Text\_Area** - allows users to add strings and numbers that can be used inside your flow. As you can see, the look is almost identical to the Text parameter however when using Text\_Area you can add more text.
+
+![](/images/docs/JNs0F8pEvGKTZyOkVAn9n_image.png)
+
+```csharp
+        [FEDecorator(Label = "Long text", Type = FeComponentType.Text_Area)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public String TextArea { get; set; }
+```
+
+
+
+&#x20; **9.    Api\_EndPoint** - allows you to add the endpoint that accesses the resource that will be used on your api call. It is used in conjunction with the Credentials\_Rest and Verb decorators.
+
+![](/images/docs/5GfWQS8Q9p6D_ORsxwQ___image.png)
+
+```csharp
+        [FEDecorator(Label = "Api endpoint", Type = FeComponentType.Api_EndPoint)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public String ApiEndpoint { get; set; }
+```
+
+
+
+**&#x20; 10.   Code\_editor -&#xA0;**&#x74;he decorator allows the use of code editor inside  a custom action.
+
+![](/images/docs/b5qyv2NMefYo0l8eA8wHy_image.png)
+
+```csharp
+        [FEDecorator(Label = "Code editor", Type = FeComponentType.Code_editor)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public String RequestParameters { get; set; }
+```
+
+&#x20;**&#x20;11.    File** - allows the upload and processing of files. You will need to use a input variable of type file. This will need to used in conjunction with the DataType and Column\_Definition parameters.
+
+![](/images/docs/dPI9aJZgSiXH8w4gsjwBN_image.png)
+
+```csharp
+[FEDecorator(Label = "File", Type = FeComponentType.File)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public FileModel f1 { get; set; }
+
+
+        [FEDecorator(Label = "Data", Type = FeComponentType.DataType)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public JArray data { get; set; }
+
+
+        [FEDecorator(Label = "Mapping", Type = FeComponentType.Column_Definition)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public object case1 { get; set; }
+```
+
+&#x20; **12.    Column\_Definition** - is used in conjunction with the DataType and File in order to map the data from the imported file on the data model
+
+![](/images/docs/poSpQJ-pDXxZKxyV9lwU4_image.png)
+
+```csharp
+        [FEDecorator(Label = "Decicional", Type = FeComponentType.Column_Definition)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public object case1 { get; set; }
+```
+
+**&#x20; 13.    Verb -&#xA0;**&#x61;llows you to select the verb that will be used on your api call. It is used in conjunction with the Credentials\_Rest and Api\_EndPoint  decorators.
+
+![](/images/docs/A9SuBegE_EgCG2fF_2ndo_image.png)
+
+```csharp
+        [FEDecorator(Label = "Verb", Type = FeComponentType.Verb)]
+        [BEDecorator(IOProperty = Direction.Input)]
+        [Validator(IsRequired = true)]
+        public string verb { get; set; }
+```
+
+&#x20; **14.    Credentials\_Rest** - allows you to add a Rest API connection inside your custom action.
+
+![](/images/docs/blvJZga3xlsBDEsc64qOl_image.png)

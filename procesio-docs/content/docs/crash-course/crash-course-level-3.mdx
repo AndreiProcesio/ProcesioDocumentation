@@ -1,0 +1,103 @@
+---
+title: "Crash Course ~ level 3"
+description: "Ohh no! did I just say that... Let's move to the next Chapter."
+---
+
+Ohh no! did I just say that... Let's move to the next Chapter.
+
+**&#x20;    Chapter I - The numerical One&#xD;**&#xA;**👉Chapter II - The One with the strings&#xD;**&#xA;**&#x20;    Chapter III - About Time & Date&#xD;**&#xA;**&#x20;    Chapter IV - The Loops&#xD;**&#xA;**&#x20;    Chapter V - Calling via API**
+For unlocking the next chapter... well you'll have to perform a task for me. Here's what you'll have to do.
+
+As part of your third task you will:
+
+📝**Task: Create** a process that unlocks Chapter II
+📖 **Learn:** Learn how to use the Credentials Manager
+
+⏰ **Duration:** 10 minutes
+
+✅ **Completion:** Upon successful completion, you will unlock the next lesson
+
+**This is how the PROCESS looks:**
+
+
+
+
+
+Easy hmm? Now let's not get ahead of ourselves... As what you are about to do is beyond your skill and will be largely treated in Chapter V don't panic... This is just for unlocking the next reward
+
+**Here is what you'll have to do:**
+
+1. Log into PROCESIO
+2. Go to your personal workspace
+3. Navigate to **Credentials Manager** and hit the **Create New&#x20;**&#x62;utton (top right)
+4. Name The Credential `procesioWebAPI` and for the credential type select REST API
+5. Hit Next Button
+
+
+
+
+
+5.For the URL field, paste: [https://webapi.procesio.app](https://webapi.procesio.app)
+
+6.Hit Save
+
+
+
+
+
+7\. From within PROCESIO main page navigate to Process Designer
+
+8\. Hit Create New
+
+9\. Create the following 5 variables:
+
+| **Name**         | **Type** | **Default value** | **Single value/List** | **Set as (input/output/none)** |
+| ---------------- | -------- | ----------------- | --------------------- | ------------------------------ |
+| ProcesioVar      | string   | none              | single value          | input                          |
+| email            | string   | none              | single value          | input                          |
+| verificationCode | string   | none              | single value          | input                          |
+| StsOut           | integer  | none              | single value          | output                         |
+| BodyOut          | JSON     | none              | single value          | output                         |
+
+
+
+
+10\. On the Canvas drag and drop the Call Api action and connect the actions it as shown above (how process looks).
+
+11\. Select the Call Api Action
+
+From the dropdown **Select api configuration\***,select the previously configured credentialsprocesioWebAPI
+
+12\. Hit Configure Request card of the Call Api action
+
+- From the **Verb\***&#x64;ropdown select POST
+- For **Endpoint\*** paste the following: `/api/webhooks/launch/80de4325-9cf5-4a95-afaf-f1206a2abf47`
+- For the input field **Status output** add the variable StsOut
+- For the input field **Body output** add the variable BodyOut
+
+13\. WhileHaving the Call Api Action Selected, from the configuration panel choose the TAB named Body
+
+
+
+
+
+14\. Within the Body TextBox paste the following:
+
+`{ "ProcessOutput": "", "email": "", "verificationCode": ""}`
+
+
+**💡 Hint:** In order to format, press Alt+Shift+F (or Options+Shift+F for Mac)
+
+15\. In between the empty quotation marks we will insert variable, here's how we're going to do it:
+
+Hit **Insert&#x20;**&#x42;utton (for Windows) or **Shift + TAB&#x20;**(for MacBook)
+
+16\. Save, Validate & Run with following input parameters:
+
+**Procesiovar:** `TheOneWithStrings`
+
+**Email:** `your email `\&lt;- indeed your own email address
+
+**Verificationcode:** `IdeserveADiploma`
+
+### **Well Done!🎉**

@@ -1,0 +1,63 @@
+---
+title: "Class decorator"
+description: "In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an individual object, dynamically,…"
+---
+
+In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an individual object, dynamically, without affecting the behavior of other objects from the same class. If you wish to use the decorators provided by Procesio you will need to implement the **IAction** interface, **MyCustomAction : IAction**.
+
+```csharp
+    [ClassDecorator(Name = "List Sort", Shape = ActionShape.Circle, 
+        Description = "Sorting a list in descending or ascending order", Classification = Classification.cat1, 
+        IsTestable = true, Tooltip = "Tooltip of the action")]
+    [Permissions(CanDelete = true, CanDuplicate = true, CanAddFromToolbar = true)]
+```
+
+Decorators use properties that indicate whether and how the attribute is applied.
+
+&#x20; **1.    Name** - allows us to provide a name for the class decorator in order to internally identify it: Name = "List Sort".
+
+![](/images/docs/mbOLg8ao6VRbPckeh0InM_image.png)
+
+**&#x20; 2.    Description&#xA0;**- allows us to give a short description of the functionality of the Custom Action.
+
+&#x20; **3.&#xA0;**&#x20;   **Shape&#xA0;**- allows us to choose the shape of the custom action from three possible choices: Circle, Square and Diamond.
+
+```text
+Shape = ActionShape.Circle
+```
+
+![](/images/docs/KWpERQ7Lh78WA3WkT51LY_image.png)
+
+<Callout type="info">
+Images can be included inside the shape during while we upload the shape by choosing from a predefined gallery.
+</Callout>
+
+![](/images/docs/atyJme1r68kxoQsThL5CH_image.png)
+
+&#x20;  **4.    Classification&#xA0;**- allows us to classify the custom action according to its characteristics, for the time being all will be classified as cat1.
+
+```text
+Classification = Classification.cat1
+```
+
+**&#x20; 5.    IsTestable** - allows you to create a testing area inside the custom action where you can check the functionality manually. When IsTestable is equal to true a new button will appear that will open a section where you can add values for testing purposes.
+
+![](/images/docs/r5ZvTRLDhjYk0J7DmTEnz_image.png)
+
+<Callout type="info">
+The action can be tested only if the components are added inside a side panel, if not the TestAction button will not be visible.
+</Callout>
+
+**&#x20; 6.    Tooltip** - allows us to add a hint that will appear when you hover the cursor over the custom action.
+
+&#x20; **7.     CanDelete**, **CanDuplicate&#x20;**&#x61;nd **CanAddFromToolbar&#x20;**&#x61;re permissions that allow us to choose the appropriate way we can use the custom action inside the platform.
+
+- if CanDelete is false the action can not be removed from the canvas once added
+- if CanDuplicate is false we can not use CTRL + C and CTRL + V to make copies of the action on the canvas
+- CanAddFromToolbar is false it will not be present in the toolbar
+
+<Callout type="info">
+Custom actions can be added from inside a process in the Custom actions tab by clicking the + Create custom action button and uploading the .nupkg file.
+</Callout>
+
+![](/images/docs/mivkh--R6TpVAZY8KqBJ1_image.png)

@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "index",
+    "overview",
+    "platform-actions",
+    "integrations-demos",
+    "custom-actions",
+    "developers-guide",
+    "crash-course",
+    "appsumo",
+    "etransport-hub"
+  ]
+}

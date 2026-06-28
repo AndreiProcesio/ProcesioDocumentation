@@ -1,0 +1,135 @@
+---
+title: "Deduplicate list"
+description: "Deduplicate identification&x20;&x77;ill allow you to automate the way you work with lists that contain duplicates. It will provide you with two lists…"
+---
+
+**Deduplicate identification&#x20;**&#x77;ill allow you to automate the way you work with lists that contain duplicates. It will provide you with two lists - one that creates the unique values and the other will contain only the duplicates ([video tutorial](https://www.linkedin.com/posts/procesio_bulk-data-deduplication-procesio-activity-6873585410933612544--yvk)). In the following you will see an example in the form of an scenario.
+
+### **Scenario**
+
+As a PROCESIO user, I want to have an action that identifies duplicates in a List (the action can work only with simple lists). The action will help me obtain a new list containing only the unique values.
+
+### How to
+
+The example requires a process with just the **DeDuplicate list** action with the following configuration.
+
+**&#x20;  Step 1.   &#x20;**[Create a new process](https://docs.procesio.com/creating-a-basic-process) and give it a name.
+
+**&#x20;  Step 2.   &#x20;**&#x44;rag the **Deduplicate list** action action to the canvas and link it to the other actions.&#x20;
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+**&#x20;  Step 3.   &#x20;**[Add the needed variables](https://docs.procesio.com/working-with-process-variables).
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+All the output variables will be of type list\&lt;object> and with the input &lt;%list%&gt; variable you have the option to provide the default value or add the value when you run the process.&#x20;
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+```text
+"[\"Jack\",\"jack\",\"John\",\"john\",\"eric\",\"eRic\",\"Eric\",\"487\",487,\"48-7\"]"
+```
+
+<Callout type="info">
+The &lt;%correlations%&gt; output variable will use the system preconfigured **correlation** data type that you can find in the Type dropdown.&#x20;
+
+*(Screenshot unavailable — image was removed from the original source.)*
+</Callout>
+
+**&#x20;  Step 4.  &#x20;**&#x20;Click the **Deduplicate list** action to access its configurations and click the button **Configure**.
+
+- add the variables like in the following screenshot
+- add the following **JSon configuration**, the "Exact" MatchType contains all conditions.  You can change it to better suit your needs:
+
+```json
+{
+	"MatchType": "Exact",
+	"Sort": "Asc"
+}
+```
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+**Full/Complex JSon configuration explanation:**
+
+**MatchType&#x20;**- pattern matching is made by using several algorithms for pattern matching, the values accepted are:
+
+- **Exact&#x20;**- an exact match needs to be validated (=). The Exact match type uses all configurations.&#x20;
+
+```json
+{
+	"MatchType": "Exact"
+}
+```
+
+
+
+- **Similar&#x20;**- it compares 2 elements to see:
+  - if special characters do not exist, E.g. John-Doe and John Doe are a match (before comparing it replaces special characters and space characters with string.empty).
+  - phone numbers E.g. 376-323-1111 and 323-1111 are a match (if after replacing special characters and spaces with string.empty the string contains only numbers, a Field1 contains Field2 OR Field2 contains Field1 assessment is made).
+  - regardless of whether WWW, HTTP(s)://,  exists to enhance domain or URL comparison.
+  - if an email is written with @ or " at " or "\[at]" should be a match.
+
+
+
+```json
+{
+	"MatchType": "Similar"
+}
+```
+
+
+
+- **Fuzzy&#x20;**- this uses the algorithms available in the **StringSimilarity** Action to compare one string against the other (read this for more details: [Actions | String similarity](https://docs.procesio.com/string-similarity) ).
+  - **FuzzyAlgorithm** and  **FuzzyThresholdproperties** are only used when MatchType = Fuzzy. If MatchType is something else, those properties will be ignored so, they can be null or can even not be present.
+
+```json
+{
+	"MatchType": "Fuzzy",
+	"FuzzyAlgorithm": "Levenstein",
+	"FuzzyThreshold": 0.7
+}
+```
+
+- **Contains&#x20;**- this checks if Field1 contains Field2 OR Field2 contains Field1.
+
+```json
+{
+	"MatchType":"Contains"
+}
+```
+
+- **Soundex&#x20;**- this checks if 2 words are similar if you would speak them. See [implementation example](https://www.techrepublic.com/blog/software-engineer/how-do-i-implement-the-soundex-function-in-c/). This matching algorithm evaluates the distance in “sounding” on a scale from 0 to 4, where 4 means the most similar “sounding” and 0 means that the words are very different.
+  - **SoundexDistance** - This is used only when the MatchType = Soundex and it can be set 0, 1, 2, 3 or 4, where 4 means that the words are very similar when spoken.
+
+```json
+{
+	"MatchType": "Soundex",
+	"SoundexDistance": 4
+}
+```
+
+- **SimilarWordMatch&#x20;**- This checks if the first N words in a string are the same as the first N words in another string OR if the last N words in a string are the same as the last N words in another string.
+  - **SimilarFirstNwords** and **SimilarLastNwords** properties are only used when **MatchType = SimilarWordMatch**, in which case at least one should be >0. If both are =0 then the SimilarWordMatch will not be executed at all since it does not make sense. If MatchType is something else, those properties will be ignored, so, they can have any value or can even not be present.
+
+```json
+{
+	"MatchType": "SimilarWordMatch",
+	"SimilarFirstNwords": 1,
+	"SimilarLastNwords": 1
+}
+```
+
+- **IgnoredTerms -&#x20;**&#x6F;ptional setting that is used to replace the words in this property with string.empty before making the Match assessment.
+- The **Sort** is a optional setting describes that after evaluating the matches, the output list should be sorted based on the cumulative rules described here. If no setting is present here, no sorting operation will be performed.
+
+**&#x20;  Step 5.    Save** and **Validate&#x20;**&#x61;n&#x64;**&#x20;Run&#x20;**&#x74;he process.
+
+&#x20;**&#x20; Step 6.   &#x20;**&#x45;ach time you will run the process you are expected to add the list you wish to check, if you entered a default value you can edit it at this point and clic&#x6B;**&#x20;Run**.
+
+*(Screenshot unavailable — image was removed from the original source.)*
+
+**&#x20;       Step 7.   &#x20;**&#x43;lick **Check instance** to see the result in the outputted variables.
+
+*(Screenshot unavailable — image was removed from the original source.)*

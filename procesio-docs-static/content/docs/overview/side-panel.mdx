@@ -1,0 +1,45 @@
+---
+title: "Side Panel"
+description: "The Side Panel element creates a collapsible overlay drawer that slides in from the side of the form when triggered. It is a space-efficient pattern…"
+---
+
+The Side Panel element creates a collapsible overlay drawer that slides in from the side of the form when triggered. It is a space-efficient pattern for surfacing supplementary information, contextual actions, or secondary form sections without navigating away from the main form or cluttering the primary layout.
+
+The panel can be opened by the user clicking its trigger button (opensidepanelbuttontext) or programmatically via the open() method — and closed via the close() method or by clicking outside (closeonclickoutside). An optional overlay (hassidepaneloverlay) dims the background when the panel is open, focusing user attention on its contents.
+
+## Key Use Cases
+
+•        Displaying record history or audit trail in a panel without leaving the form
+
+•        Showing help documentation, instructions, or field-level guidance on demand
+
+•        Surfacing a secondary action form (e.g., 'Add Attachment') without a full page change
+
+•        Programmatically opening the panel when a specific event occurs (e.g., clicking a data row)
+
+•        Using closeonclickoutside for panels that should dismiss easily vs. forcing explicit close
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms. The open() and close() methods can also be called programmatically.*
+
+
+
+| **API Name**                | **Description**                                     | **Type** | **Default** | **Notes** |
+| --------------------------- | --------------------------------------------------- | -------- | ----------- | --------- |
+| **opensidepanelbuttontext** | Label on the button that triggers the panel to open | string   | —           | —         |
+| **sidepaneltitle**          | Title shown in the side panel's header area         | string   | —           | —         |
+| **hassidepaneloverlay**     | If true, shows a dimmed overlay behind the panel    | boolean  | false       | —         |
+| **closeonclickoutside**     | If true, clicking outside the panel closes it       | boolean  | —           | —         |
+| **visible**                 | Controls overall element visibility                 | boolean  | true        | —         |
+| **name**                    | Unique element name                                 | string   | —           | —         |
+| **id**                      | Unique element ID                                   | string   | —           | —         |
+
+
+
+**Programmatic Methods:**
+
+| **API Name** | **Description**                        | **Type** | **Default** | **Notes**             |
+| ------------ | -------------------------------------- | -------- | ----------- | --------------------- |
+| **open()**   | Programmatically opens the side panel  | method   | —           | Call from JS or event |
+| **close()**  | Programmatically closes the side panel | method   | —           | Call from JS or event |

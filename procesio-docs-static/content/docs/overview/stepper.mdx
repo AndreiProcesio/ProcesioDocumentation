@@ -1,0 +1,53 @@
+---
+title: "Stepper"
+description: "The Stepper element breaks a long or complex form into a sequence of named steps, presenting one step at a time with Previous and Next navigation…"
+---
+
+The Stepper element breaks a long or complex form into a sequence of named steps, presenting one step at a time with Previous and Next navigation buttons. This dramatically reduces cognitive load for end users — instead of scrolling through a wall of fields, they progress through a guided, step-by-step journey with clear progress indicators.
+
+Each Step within the Stepper is a separate container with its own label, tooltip, and visibility. The Stepper's activestepindex attribute is fully controllable at runtime, meaning you can programmatically jump to a specific step — for example, skipping to step 3 based on a selection made in step 1, or returning the user to a step with validation errors. The Next and Previous button labels are also customizable.
+
+## Key Use Cases
+
+•        Onboarding forms broken into Personal Info / Work Details / Documents / Review steps
+
+•        Multi-phase approval workflows where each step represents a reviewer's section
+
+•        Wizard-style request forms that guide users through configuration choices
+
+•        Programmatically advancing activestepindex from a process to skip irrelevant steps
+
+•        Conditionally hiding steps that are not applicable to the current user or context
+
+## Runtime API — Attributes in Procesio Forms
+
+*Both the Stepper container and each Step have their own API attributes, all accessible at runtime via the data model.*
+
+
+
+**Stepper Container:**
+
+| **API Name**           | **Description**                                                                     | **Type** | **Default** | **Notes** |
+| ---------------------- | ----------------------------------------------------------------------------------- | -------- | ----------- | --------- |
+| **nextbuttontext**     | Label shown on the Next navigation button                                           | string   | next        | —         |
+| **previousbuttontext** | Label shown on the Previous navigation button                                       | string   | previous    | —         |
+| **activestepindex**    | The index of the currently active step (0-based) — set programmatically to navigate | number   | 0           | —         |
+| **visible**            | Show or hide the entire stepper                                                     | boolean  | true        | —         |
+| **name**               | Unique element name                                                                 | string   | —           | —         |
+| **id**                 | Unique element ID                                                                   | string   | —           | —         |
+
+
+
+**Individual Step:**
+
+| **API Name** | **Description**                                  | **Type** | **Default** | **Notes** |
+| ------------ | ------------------------------------------------ | -------- | ----------- | --------- |
+| **label**    | The step's title shown in the progress indicator | string   | —           | —         |
+| **tooltip**  | Help text shown alongside the step label         | string   | —           | —         |
+| **visible**  | Show or hide this step                           | boolean  | true        | —         |
+| **name**     | Unique step name                                 | string   | —           | —         |
+| **id**       | Unique step ID                                   | string   | —           | —         |
+
+
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

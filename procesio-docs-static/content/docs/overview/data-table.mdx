@@ -1,0 +1,48 @@
+---
+title: "Data Table"
+description: "The Data Table element renders a read-oriented tabular view of structured data within a form. It is designed for displaying datasets — lists of…"
+---
+
+The Data Table element renders a read-oriented tabular view of structured data within a form. It is designed for displaying datasets — lists of records, search results, process outputs — in a clean, sortable, paginated grid. Unlike the Dynamic Table Row (which supports inline editing), the Data Table is primarily a presentation component.
+
+Column definitions are flexible: you can define them statically, supply them as a JSON structure, or load them from a URL. The table's row data lives in the value array and can be set at runtime from a process output. Pagination is fully configurable (showpagination, page, countperpage, totalitemscount), supporting both client-side and server-side pagination patterns.
+
+## Key Use Cases
+
+•        Displaying search results returned by a process action in a structured grid
+
+•        Showing a list of related records (orders, invoices, tasks) loaded on form open
+
+•        Server-side paginated tables — updating page and totalitemscount from a process on page change
+
+•        Review tables where an approver sees all line items before deciding
+
+•        Conditionally hiding columns or toggling row number display based on user role
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms.*
+
+
+
+| **API Name**                     | **Description**                                                 | **Type**    | **Default** | **Notes**              |
+| -------------------------------- | --------------------------------------------------------------- | ----------- | ----------- | ---------------------- |
+| **label**                        | Display label above the table                                   | string      | —           | —                      |
+| **tooltip**                      | Help text shown alongside the label                             | string      | —           | —                      |
+| **infotext**                     | Supplementary info below the table                              | string      | —           | —                      |
+| **emptytabletext**               | Text shown when the table has no rows to display                | string      | —           | —                      |
+| **visible**                      | Controls element visibility                                     | boolean     | true        | —                      |
+| **value**                        | The table's row data array — set from process output at runtime | any\[]      | \[]         | —                      |
+| **columnsdefinitionsourcetype**  | How column definitions are provided                             | string      | —           | static list, json, url |
+| **columnsdefinitionsourcevalue** | The column definition data                                      | string\|any | —           | —                      |
+| **approved**                     | If true, marks the table as approved                            | boolean     | —           | —                      |
+| **showheader**                   | Show or hide column header row                                  | boolean     | —           | —                      |
+| **addvisualrownumber**           | Prepend a row number column                                     | boolean     | —           | —                      |
+| **showpagination**               | Enable pagination controls                                      | boolean     | —           | —                      |
+| **page**                         | Current page index (when pagination is enabled)                 | number      | —           | —                      |
+| **countperpage**                 | Number of rows per page                                         | number      | —           | —                      |
+| **totalitemscount**              | Total row count for server-side pagination                      | number      | —           | —                      |
+| **name**                         | Unique element name                                             | string      | —           | —                      |
+| **id**                           | Unique element ID                                               | string      | —           | —                      |
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

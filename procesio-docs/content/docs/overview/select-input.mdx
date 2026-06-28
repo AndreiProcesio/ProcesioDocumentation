@@ -1,0 +1,54 @@
+---
+title: "Select Input"
+description: "The Textarea element provides a multi-line text input area, ideal for collecting longer or unstructured content — such as notes, comments,…"
+---
+
+The Textarea element provides a multi-line text input area, ideal for collecting longer or unstructured content — such as notes, comments, descriptions, reasons for rejection, or any narrative input that would be impractical to fit in a single-line field.
+
+Unlike the Text Input, which is optimized for concise values, the Textarea is designed for paragraphs and blocks of text. The visible row height is configurable (rows), allowing you to match the input size to the expected content length. It supports the same validation, default values, and runtime control features as other input elements.
+
+## Key Use Cases
+
+•        Collecting comments, feedback, rejection reasons, or approval notes
+
+•        Displaying multi-line process outputs or computed summaries in read-only mode
+
+•        Adjusting visible rows dynamically to match expected content length
+
+•        Pre-filling a textarea with a template or boilerplate text via defaultvalue on load
+
+## Runtime API — Attributes in Procesio Forms
+
+*All attributes below are accessible and modifiable at runtime via the element's data model in Procesio Forms — on any available event such as onLoad, onChange, or custom triggers.*
+
+
+
+| **API Name**     | **Description**                                      | **Type**     | **Default** | **Notes** |
+| ---------------- | ---------------------------------------------------- | ------------ | ----------- | --------- |
+| **label**        | Display label above the textarea                     | string       | —           | —         |
+| **placeholder**  | Hint text shown inside the empty textarea            | string       | —           | —         |
+| **tooltip**      | Help text shown alongside the label                  | string       | —           | —         |
+| **infotext**     | Supplementary info displayed below the input         | string       | —           | —         |
+| **rows**         | Number of visible text rows (controls height)        | number       | 4           | —         |
+| **defaultvalue** | Initial value when the form loads                    | string       | —           | —         |
+| **value**        | Current runtime value — read or set programmatically | string       | —           | —         |
+| **readonly**     | View-only mode — user cannot edit                    | boolean      | false       | —         |
+| **disabled**     | Fully non-interactive                                | boolean      | false       | —         |
+| **visible**      | Controls element visibility                          | boolean      | true        | —         |
+| **name**         | Unique element name                                  | string       | —           | —         |
+| **id**           | Unique element ID                                    | string       | —           | —         |
+| **required**     | Marks the field as mandatory on submit               | boolean      | false       | —         |
+| **regex**        | Regex validation pattern                             | string\|null | —           | —         |
+
+### JSON source type example
+
+> \[
+> &#x20;   \&#123;
+> &#x20;     \&quot;label\&quot;: \&quot;dollar\&quot;,
+> &#x20;     \&quot;value\&quot;: \&quot;$\&quot;
+> &#x20;   &#125;
+> ]
+
+
+
+For support, please join our [Discord community](https://discord.com/invite/CEBuKgJefv) for further assistance and support.

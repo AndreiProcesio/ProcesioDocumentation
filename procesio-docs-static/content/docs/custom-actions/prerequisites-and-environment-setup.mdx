@@ -1,0 +1,67 @@
+---
+title: "Prerequisites and Environment setup"
+description: "The Ringhel.Procesio.Action.Core package is stored on Github and in order to have access to it you will need a account."
+---
+
+## Connect to your GitHub account
+
+The **Ringhel.Procesio.Action.Core** package is stored on Github and in order to have access to it you will need a account.
+
+### **Prerequisites**
+
+1. ****[Github account](https://github.com/)****
+2. [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) (or above, the community version will suffice) or any compatible editor.&#x20;
+
+### **Github**
+
+1. Navigate to the [Github registration page](https://github.com/) and create an account.
+2. Create your Personal SSH Key.
+
+- select **Settings&#x20;**&#x66;rom the upper right dropdown
+
+![](/images/docs/ppoltKAQzk-EJiDvis62A_capture.PNG)
+
+- click **Developer settings > Developer settings > Personal access tokens > Generate New Token**
+- select **No Expiration** as the Expiration type
+- Make sure that **read\:packages** option is selected
+
+![](/images/docs/lHs4PEypPXLq87Qqcehb1_fd2a59f334f87353caf4a08724f9e02ad2f4f3a5fc8c6088effa92998b696edenuggetpkg.png)
+
+- Click th&#x65;**&#x20;Generate token** button
+- Make sure to copy your personal access token now. You won’t be able to see it again!
+
+### **Visual Studio**
+
+1. Open [Visual Studio](https://visualstudio.microsoft.com/downloads/).
+2. From the Visual Studio Ribbon select Settings from the Git dropdown and add your [Github](https://github.com/) account sign in information.
+3. When you will be prompted to add the password use the token generated at the previous section.
+
+![](/images/docs/qVj08Vqc7VTH-IRsQDx-a_218ed02068b261ff5833a327676c6c025207beeea57f11057ad71f5e3ea1bc6f1632727252882.png)
+
+&#x20; 4.     From the ribon select **Properties** from the Git dropdown.
+
+![](/images/docs/2svMUp3oRHwrV-y-lWlnI_image.png)
+
+&#x20; 5\.    Click **Package Sources** from under Nuget Package Manager.
+
+&#x20; 6\.    Create a new Source and give it a name and the Source [https://api.nuget.org/v3/index.json](https://api.nuget.org/v3/index.json) **.**
+
+![](/images/docs/MjjzWiN1POKcbg7FcF8aL_image.png)
+
+The first time you will use this source Visual studio will ask your github username and password, the password is the token generated in the previous section.
+
+### **Add the nuget**
+
+Procesio has created and published the **Ringhel.Procesio.Action.Core** package to assist you with the creation of custom actions. In order for you to use it you will need to follow these steps:
+
+1. Download [nuget.exe](https://www.nuget.org/downloads), at the moment of the writing this article I used [nuget.exe - recommended latest v5.10.0.](https://dist.nuget.org/win-x86-commandline/latest/nuget.exe)
+2. Add the folder where you placed nuget.exe to your PATH environment variable to use the CLI tool from anywhere
+   - Click the Windows button
+   - Type **Edit the System Environment Variables** and select the program displayed
+   - Click **Environment Variables**
+   - In the **System variables** select **Path&#xA0;**&#x61;nd click **New&#xA0;**&#x61;nd add the path to the nugget.exe fille
+3. Add the PROCESIO Nuget source from the command line by running the following the command from command line (in admin mode to be sure it will be processed), for the password you will need to use the token created at step 2 in the Connect to your GitHub account guide.
+
+<Callout type="info">
+*nuget sources add -Name procesio-development -Source https\://nuget.pkg.github.com/PROCESIO/index.json  -UserName&#xA0;*\[your Github user name]*&#xA0;-Password&#xA0;*\[your Github API Key]
+</Callout>
