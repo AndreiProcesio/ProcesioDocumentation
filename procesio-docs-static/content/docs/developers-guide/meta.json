@@ -1,5 +1,6 @@
 {
   "title": "Developer’s Guide",
+  "root": true,
   "pages": [
     "google-oauth-scopes",
     "my-test",

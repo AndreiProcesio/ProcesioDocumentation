@@ -1,5 +1,6 @@
 {
   "title": "Crash Course",
+  "root": true,
   "pages": [
     "crash-course-level-0",
     "crash-course-level-1",

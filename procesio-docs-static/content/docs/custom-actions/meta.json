@@ -1,5 +1,6 @@
 {
   "title": "Custom Actions",
+  "root": true,
   "pages": [
     "backend-decorator",
     "class-decorator",
