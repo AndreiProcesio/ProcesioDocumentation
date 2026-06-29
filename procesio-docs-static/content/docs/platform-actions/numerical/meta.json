@@ -7,7 +7,6 @@
     "divide",
     "multiply",
     "round-up",
-    "round",
     "round-down",
     "parse-number"
   ]
