@@ -1,10 +1,14 @@
 import { Inter } from 'next/font/google';
 import { Provider } from '@/components/provider';
+import type { Metadata } from 'next';
 import './global.css';
 
-const inter = Inter({
-  subsets: ['latin'],
-});
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'PROCESIO Docs',
+  icons: { icon: '/favicon.png' },
+};
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
