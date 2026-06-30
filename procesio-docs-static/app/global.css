@@ -34,3 +34,14 @@ html > body[data-scroll-locked] {
   background: transparent !important;
   padding: 0 !important;
 }
+
+/* feedback: keep the left sidebar flush to the left edge at any zoom/width
+   (remove the auto-centering left margin column; extra space goes to the right) */
+#nd-docs-layout {
+  grid-template-columns:
+    0
+    var(--fd-sidebar-col)
+    minmax(0, calc(var(--fd-layout-width, 97rem) - var(--fd-sidebar-width) - var(--fd-toc-width)))
+    var(--fd-toc-width)
+    minmax(min-content, 1fr) !important;
+}
