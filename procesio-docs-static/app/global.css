@@ -26,3 +26,11 @@ html > body[data-scroll-locked] {
   --color-fd-background: #ffffff;
   --color-fd-card: #ffffff;
 }
+
+/* feedback: footer theme toggle must not look like a search box */
+#nd-sidebar [aria-label="Toggle Theme"] { margin-inline-start: 0 !important; }
+#nd-sidebar div:has(> [aria-label="Toggle Theme"]) {
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
